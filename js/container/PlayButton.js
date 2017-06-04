@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSwitchMode: () => {
+        onPlay: () => {
             dispatch({type: 'PAUSE'})
         }
     }

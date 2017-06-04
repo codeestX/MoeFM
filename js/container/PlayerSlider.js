@@ -21,11 +21,8 @@ class PlayerSlider extends Component {
         totalTime: 500
     };
 
-    handleComplete() {
-        this.props.onComplete();
-    }
-
     handleChange(value) {
+        console.log(value);
         this.props.onChange(value);
     }
 
@@ -36,8 +33,7 @@ class PlayerSlider extends Component {
                 <Slider style={{flex: 1}}
                         maximumValue={this.props.totalTime || 1}
                         value={this.props.progressTime || 0}
-                        onSlidingComplete={this.handleComplete.bind(this)}
-                        onValueChange={this.handleChange.bind(this)}
+                        onSlidingComplete={this.handleChange.bind(this)}
                 />
                 <Text style={styles.time}>{date.parseSecond2String(this.props.totalTime)}</Text>
             </View>
@@ -66,9 +62,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onComplete: () => {
-            dispatch({type: 'FINISH_SONG'})
-        },
         onChange: (value) => {
             dispatch({type: 'SEEK_PROGRESS', time: value})
         }

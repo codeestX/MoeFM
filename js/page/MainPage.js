@@ -8,8 +8,7 @@ import React, {Component} from 'react'
 import {
     StyleSheet,
 } from 'react-native'
-import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator, TabNavigator, TabView } from 'react-navigation';
+import { StackNavigator, TabNavigator, TabView } from 'react-navigation';
 import { ThemeFlags } from '../style/theme';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
@@ -23,6 +22,7 @@ import PlayerPage from './PlayerPage'
 
 import songs from  '../reducer/songs'
 import playerMiddleware from '../middleware/player'
+import streamMiddleware from '../middleware/stream'
 
 
 const rootReducer = combineReducers({
@@ -30,7 +30,7 @@ const rootReducer = combineReducers({
 });
 
 const store = createStore(rootReducer,
-    applyMiddleware(playerMiddleware));
+    applyMiddleware(streamMiddleware));
 
 export default class MainPage extends Component {
 

@@ -16,7 +16,6 @@ import { connect } from 'react-redux'
 import Song from '../model/Song'
 import Item from '../component/SongItem'
 import GlobalStyles from  '../style/global'
-import Player from '../player/PlayerManager'
 import Api from '../model/Api'
 
 class DetailPage extends Component {
@@ -41,14 +40,12 @@ class DetailPage extends Component {
             <FlatList
                 data={this.state.subsData}
                 renderItem={({item}) => <Item song={item} onPress={(song) => {
-                    navigate('Player', {song: song});
                     if (this.props.onPushSong) {
                         this.props.onPushSong(song);
                     }
+                    navigate('Player', {song: song});
                 }}/>}
                 keyExtractor={(item, index) => item.id}
-                // onRefresh={() => this.fetchSubsData(params.type, params.wiki.id)}
-                // refreshing={this.state.refreshing}
                 ItemSeparatorComponent={() => <Text style={styles.separator}/>}
                 ListHeaderComponent={() => (
                     <View>
@@ -107,7 +104,14 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = (dispatch) => {
     return {
         onPushSong: (song) => {
-            dispatch({type: 'PUSH_SONG', song: song})
+            dispatch({type: 'PUSH_SONG', song: song});
+            // dispatch({type: 'CUT_SONG', song: song});
+            // setTimeout(() => {
+            //     dispatch({type: 'CUT_SONG', song: song});
+            //         this.props.navigation('Player', {song: song});
+            //     }
+            //     , 20
+            // );
         },
         onAddSongs: (songs) => {
             dispatch({type: 'ADD_SONGS', song: songs})

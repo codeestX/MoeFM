@@ -3,8 +3,7 @@
  * @date: 2017/5/19
  * @description:
  */
-
-let Sound = require('react-native-sound');
+import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
 
 //actions
 const ADD_SONG = 'ADD_SONG';        //增加歌曲
@@ -22,7 +21,7 @@ const SEEK_PROGRESS = 'SEEK_PROGRESS';  //指定进度
 
 let storeInstance;
 
-const playerMiddleware = store => next => action => {
+const streamMiddleware = store => next => action => {
     storeInstance = store;
     const thisState = store.getState();
     const result = next(action);
@@ -55,69 +54,41 @@ const playerMiddleware = store => next => action => {
     return result;
 };
 
-export default playerMiddleware;
+export default streamMiddleware;
 
-let singletonSong = null;
 let progressCountDown;
+let currentTime = 0;
 
 const init = (url) => {
-    if (singletonSong !== null) {
-        release();
-    }
     console.log('url: '+ url);
-    singletonSong = new Sound(url, '', (e) => {
-        if (e) {
-            console.log('failed to load the sound', e);
-            return;
-        }
-        play(false);
-        // setTimeout(play(false), 200);
-        startProgress();
-    });
+    ReactNativeAudioStreaming.play(url, {showIniOSMediaCenter: true, showInAndroidNotifications: true});
+    startProgress();
 };
 
 const play = (isPlaying) => {
     if (isPlaying) {
-        singletonSong.pause();
+        ReactNativeAudioStreaming.pause();
         stopProgress();
     } else {
-        singletonSong.play((success) => {
-            if (success) {
-                console.log('successfully finished playing');
-                releaseAndNext();
-            } else {
-                console.log('playback failed due to audio decoding errors');
-            }
-        });
+        ReactNativeAudioStreaming.resume();
         startProgress();
     }
 };
 
-const release = () => {
-    stopProgress();
-    singletonSong.release();
-};
-
-const releaseAndNext = () => {
-    //自然播放结束
-    release();
-    storeInstance.dispatch({type: NEXT_SONG})
-};
-
 const seek = (time) => {
-    singletonSong.setCurrentTime(time);
+    ReactNativeAudioStreaming.seekToTime(time);
 };
 
 const startProgress = () => {
-    if (singletonSong !== null) {
-        progressCountDown = setInterval(() => {
-            singletonSong.getCurrentTime((seconds) => storeInstance.dispatch({type: PROGRESS, time: seconds}));
-        },1000);
-    }
+    progressCountDown = setInterval(() => {
+        storeInstance.dispatch({type: PROGRESS, time: currentTime++});
+        if (currentTime >= storeInstance.getState().totalTime) {
+            stopProgress();
+            storeInstance.dispatch({type: NEXT_SONG});
+        }
+    },1000);
 };
 
 const stopProgress = () => {
-    if (singletonSong !== null) {
-        clearInterval(progressCountDown);
-    }
+    clearInterval(progressCountDown);
 };

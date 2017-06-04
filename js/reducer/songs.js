@@ -10,7 +10,6 @@ const ADD_SONGS = 'ADD_SONGS';      //批量增加歌曲
 const PUSH_SONG = 'PUSH_SONG';      //新增歌曲并播放
 const DELETE_SONG = 'DELETE_SONG';  //删除歌曲
 const CLEAR_SONGS = 'CLEAR_SONGS';  //清空歌曲
-const FINISH_SONG = 'FINISH_SONG';  //当前歌曲结束，自动播放下一首
 const CUT_SONG = 'CUT_SONG';        //切到指定歌曲
 const NEXT_SONG = 'NEXT_SONG';      //上一首歌
 const LAST_SONG = 'LAST_SONG';      //下一首歌
@@ -34,7 +33,15 @@ export default function (state, action) {
     }
     switch (action.type) {
         case ADD_SONG:
-            return {
+            let newSongIndex = -1;
+            for (let [index, song] of state.playList.entries()) {
+                if (song.id === action.song.id) {
+                    newSongIndex = index;
+                    break;
+                }
+            }
+            return newSongIndex !== -1? state:
+            {
                 ...state,
                 playList: [...state.playList, action.song]
             };
@@ -44,12 +51,26 @@ export default function (state, action) {
                 playList: [...state.playList, action.songs]
             };
         case PUSH_SONG:
-            return {
-                ...state,
-                playList: [...state.playList, action.song],
-                currentSong: action.song,
-                currentIndex: state.playList.length
-            };
+            let pushSongIndex = -1;
+            for (let i = 0; i< state.playList.length; i++) {
+                if (state.playList[i].id === action.song.id) {
+                    pushSongIndex = index;
+                    break;
+                }
+            }
+            // for (let [index, song] of state.playList.entries()) {
+            //     if (song.id === action.song.id) {
+            //         pushSongIndex = index;
+            //         break;
+            //     }
+            // }
+            return pushSongIndex !== -1? state:
+                {
+                    ...state,
+                    playList: [...state.playList, action.song],
+                    currentSong: action.song,
+                    currentIndex: pushSongIndex
+                };
         case DELETE_SONG:
             return {
                 ...state,
@@ -64,12 +85,20 @@ export default function (state, action) {
                 playList: []
             };
         case CUT_SONG:
-            return {
-                ...state,
-                currentSong: state.playList[action.index],
-                currentIndex: action.index
-            };
-
+            console.log(state.playList);
+            let cutSongIndex = -1;
+            for (let [index, song] of state.playList.entries()) {
+                if (song.id === action.song.id) {
+                    cutSongIndex = index;
+                    break;
+                }
+            }
+            return cutSongIndex === -1? state:
+                {
+                    ...state,
+                    currentSong: state.playList[cutSongIndex],
+                    currentIndex: cutSongIndex
+                };
         case NEXT_SONG:
             return {
                 ...state,
