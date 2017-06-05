@@ -17,6 +17,8 @@ import { BlurView } from 'react-native-blur';
 import CustomButton from '../component/CustomButton'
 import ModeButton from '../container/ModeButton'
 import PlayButton from '../container/PlayButton'
+import LoveButton from '../container/LoveButton'
+import DownloadButton from '../container/DownloadButton'
 import PlayerSlide from '../container/PlayerSlider'
 
 export default class PlayerUI extends Component {
@@ -64,12 +66,8 @@ export default class PlayerUI extends Component {
                     />
                     <Text style={styles.title}>{this.props.song.title}</Text>
                     <View style={styles.func}>
-                        <CustomButton onPress={() => this.props.onLove()}>
-                            <Image style={styles.icon} source={require('../images/ic_love.png')}/>
-                        </CustomButton>
-                        <CustomButton onPress={() => this.props.onDownload()}>
-                            <Image style={styles.icon} source={require('../images/ic_download.png')}/>
-                        </CustomButton>
+                        <LoveButton innerStyle={styles.icon}/>
+                        <DownloadButton innerStyle={styles.icon}/>
                     </View>
                     <PlayerSlide/>
                     <View style={styles.control}>

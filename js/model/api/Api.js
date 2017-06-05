@@ -4,7 +4,7 @@
  * @description:
  */
 
-import showToast from '../util/toast';
+import showToast from '../../util/toast';
 
 const API_KEY = 'b3254bb3f2b76457a10e144bc6be7c8a058f22631';
 

@@ -17,6 +17,8 @@ const PAUSE = 'PAUSE';              //暂停、恢复
 const SWITCH_MODE = 'SWITCH_MODE';  //切换播放模式
 const PROGRESS = 'PROGRESS';                    //当前进度
 const SEEK_PROGRESS = 'SEEK_PROGRESS';          //指定进度
+const LOVE = 'LOVE';            //点击喜欢
+const LOCAL = 'LOCAL';          //点击下载
 
 export default function (state, action) {
     if (!state) {
@@ -34,9 +36,9 @@ export default function (state, action) {
     switch (action.type) {
         case ADD_SONG:
             let newSongIndex = -1;
-            for (let [index, song] of state.playList.entries()) {
-                if (song.id === action.song.id) {
-                    newSongIndex = index;
+            for (let i = 0; i< state.playList.length; i++) {
+                if (state.playList[i].id === action.song.id) {
+                    newSongIndex = i;
                     break;
                 }
             }
@@ -54,16 +56,10 @@ export default function (state, action) {
             let pushSongIndex = -1;
             for (let i = 0; i< state.playList.length; i++) {
                 if (state.playList[i].id === action.song.id) {
-                    pushSongIndex = index;
+                    pushSongIndex = i;
                     break;
                 }
             }
-            // for (let [index, song] of state.playList.entries()) {
-            //     if (song.id === action.song.id) {
-            //         pushSongIndex = index;
-            //         break;
-            //     }
-            // }
             return pushSongIndex !== -1? state:
                 {
                     ...state,
@@ -85,11 +81,10 @@ export default function (state, action) {
                 playList: []
             };
         case CUT_SONG:
-            console.log(state.playList);
             let cutSongIndex = -1;
-            for (let [index, song] of state.playList.entries()) {
-                if (song.id === action.song.id) {
-                    cutSongIndex = index;
+            for (let i = 0; i< state.playList.length; i++) {
+                if (state.playList[i].id === action.song.id) {
+                    cutSongIndex = i;
                     break;
                 }
             }
@@ -132,6 +127,24 @@ export default function (state, action) {
                 ...state,
                 progressTime: action.time
             };
+        }
+        case LOVE: {
+            return {
+                ...state,
+                currentSong: {
+                    ...state.currentSong,
+                    isLoved: !state.currentSong.isLoved
+                }
+            }
+        }
+        case LOCAL: {
+            return {
+                ...state,
+                currentSong: {
+                    ...state.currentSong,
+                    isLocaled: !state.currentSong.isLocaled
+                }
+            }
         }
         default:
             return state

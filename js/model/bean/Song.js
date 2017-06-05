@@ -4,6 +4,8 @@
  * @description:
  */
 
+import realm from '../../util/realm'
+
 export default class Song {
 
     constructor(item, index) {
@@ -19,6 +21,9 @@ export default class Song {
             this.time = item.sub_upload[0].up_data.time;
             this.size = item.sub_upload[0].up_size;
         }
+
+        this.isLoved = realm.queryLovedSong(this.id);
+        this.isLocaled = realm.queryLocaledSong(this.id);
 
         function parseCoverUrl(parent) {
             let temp = parseInt(parent/100);

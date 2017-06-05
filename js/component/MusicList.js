@@ -9,8 +9,8 @@ import {
     FlatList,
 } from 'react-native'
 import Item from './MusicListItem'
-import Wiki from  '../model/Wiki'
-import Api from '../model/Api'
+import Wiki from  '../model/bean/Wiki'
+import Api from '../model/api/Api'
 
 export default class MusicList extends Component {
 

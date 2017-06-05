@@ -27,7 +27,9 @@ const streamMiddleware = store => next => action => {
     const result = next(action);
     const newState = store.getState();
     const actionType = String(action.type);
-
+    if (newState === thisState) {
+        return result;
+    }
     switch (actionType) {
         case CUT_SONG:
             init(newState.playList[newState.currentIndex].url);
@@ -91,4 +93,5 @@ const startProgress = () => {
 
 const stopProgress = () => {
     clearInterval(progressCountDown);
+    currentTime = 0;
 };

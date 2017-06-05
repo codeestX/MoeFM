@@ -70,8 +70,8 @@ const init = (url) => {
             console.log('failed to load the sound', e);
             return;
         }
-        play(false);
-        // setTimeout(play(false), 200);
+        // play(false);
+        setTimeout(play(false), 200);
         startProgress();
     });
 };

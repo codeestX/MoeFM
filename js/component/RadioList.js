@@ -12,8 +12,8 @@ import {
 } from 'react-native'
 import Item from './RadioListItem'
 import Header from './SectionHeader'
-import Wiki from  '../model/Wiki'
-import Api from '../model/Api'
+import Wiki from  '../model/bean/Wiki'
+import Api from '../model/api/Api'
 
 export default class RadioList extends Component {
 

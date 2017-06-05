@@ -21,7 +21,7 @@ export default class DateUtil {
         if (second <= 9) {
             second = '0' + second;
         }
-        return min + '.' + second;
+        return min + ':' + second;
     }
 
     static parseString2Second(str) {

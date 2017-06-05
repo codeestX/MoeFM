@@ -13,10 +13,10 @@ import {
     FlatList,
 } from 'react-native'
 import { connect } from 'react-redux'
-import Song from '../model/Song'
+import Song from '../model/bean/Song'
 import Item from '../component/SongItem'
 import GlobalStyles from  '../style/global'
-import Api from '../model/Api'
+import Api from '../model/api/Api'
 
 class DetailPage extends Component {
 
