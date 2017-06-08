@@ -17,6 +17,10 @@ import Song from '../model/bean/Song'
 import Item from '../component/SongItem'
 import GlobalStyles from  '../style/global'
 import Api from '../model/api/Api'
+import {
+    CoordinatorLayout,
+} from 'react-native-bottom-sheet-behavior'
+import PlayerUIBottom from '../container/PlayerUIBottom'
 
 class DetailPage extends Component {
 
@@ -35,27 +39,29 @@ class DetailPage extends Component {
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
-
         return (
-            <FlatList
-                data={this.state.subsData}
-                renderItem={({item}) => <Item song={item} onPress={(song) => {
-                    if (this.props.onPushSong) {
-                        this.props.onPushSong(song);
-                    }
-                    navigate('Player', {song: song});
-                }}/>}
-                keyExtractor={(item, index) => item.id}
-                ItemSeparatorComponent={() => <Text style={styles.separator}/>}
-                ListHeaderComponent={() => (
-                    <View>
-                        <View style={{justifyContent: 'flex-end'}}>
-                            <Image style={{alignSelf: 'stretch'}} source={{uri: params.wiki.cover, height: 240}}/>
-                            <Text style={styles.title} numberOfLines={1}>{params.wiki.title}</Text>
+            <CoordinatorLayout style={{flex: 1}}>
+                <FlatList
+                    data={this.state.subsData}
+                    renderItem={({item, index}) => <Item song={item} index={index} onPress={(song) => {
+                        if (this.props.onPushSong) {
+                            this.props.onPushSong(song);
+                        }
+                        navigate('Player');
+                    }}/>}
+                    keyExtractor={(item, index) => item.id}
+                    ItemSeparatorComponent={() => <Text style={styles.separator}/>}
+                    ListHeaderComponent={() => (
+                        <View>
+                            <View style={{justifyContent: 'flex-end'}}>
+                                <Image style={{alignSelf: 'stretch'}} source={{uri: params.wiki.cover, height: 240}}/>
+                                <Text style={styles.title} numberOfLines={1}>{params.wiki.title}</Text>
+                            </View>
+                            {params.wiki.intro !== undefined && <Text style={ styles.intro}>{params.wiki.intro}</Text>}
                         </View>
-                        {params.wiki.intro !== undefined && <Text style={ styles.intro}>{params.wiki.intro}</Text>}
-                    </View>
-                )}/>
+                    )}/>
+                <PlayerUIBottom onPress={() => navigate('Player')} onList={this.handleHeaderPress}/>
+            </CoordinatorLayout>
         );
     }
 
@@ -65,6 +71,10 @@ class DetailPage extends Component {
         this.fetchSubsData(params.type, params.wiki.id);
     }
 
+    handleHeaderPress = () => {
+
+    };
+
     async fetchSubsData(type, id) {
         this.setState({refreshing: true});
         let result = await Api.getSubsData(type, id);
@@ -73,13 +83,13 @@ class DetailPage extends Component {
             //music
             let songs = result.response.subs;
             for (let i = 0, len = songs.length; i < len; i++) {
-                songData.push(new Song(songs[i], i));
+                songData.push(new Song(songs[i]));
             }
         } else {
             //radio
             let songs = result.response.relationships;
             for (let i = 0, len = songs.length; i < len; i++) {
-                songData.push(new Song(songs[i].obj, i));
+                songData.push(new Song(songs[i].obj));
             }
         }
         this.setState({subsData: songData, refreshing: false});
@@ -104,14 +114,7 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = (dispatch) => {
     return {
         onPushSong: (song) => {
-            dispatch({type: 'PUSH_SONG', song: song});
-            // dispatch({type: 'CUT_SONG', song: song});
-            // setTimeout(() => {
-            //     dispatch({type: 'CUT_SONG', song: song});
-            //         this.props.navigation('Player', {song: song});
-            //     }
-            //     , 20
-            // );
+            dispatch({type: 'POINT_SONG', song: song});
         },
         onAddSongs: (songs) => {
             dispatch({type: 'ADD_SONGS', song: songs})

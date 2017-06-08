@@ -8,8 +8,7 @@ import realm from '../../util/realm'
 
 export default class Song {
 
-    constructor(item, index) {
-        this.index = index;
+    constructor(item) {
         this.id = item.sub_id;
         this.title = item.sub_title;
         this.date = item.sub_modified;

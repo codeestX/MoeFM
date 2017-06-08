@@ -4,13 +4,14 @@
  * @description:
  */
 
+import showToast from '../util/toast'
+
 //actions
 const ADD_SONG = 'ADD_SONG';        //增加歌曲
 const ADD_SONGS = 'ADD_SONGS';      //批量增加歌曲
-const PUSH_SONG = 'PUSH_SONG';      //新增歌曲并播放
+const POINT_SONG = 'POINT_SONG';    //指定歌曲并播放
 const DELETE_SONG = 'DELETE_SONG';  //删除歌曲
 const CLEAR_SONGS = 'CLEAR_SONGS';  //清空歌曲
-const CUT_SONG = 'CUT_SONG';        //切到指定歌曲
 const NEXT_SONG = 'NEXT_SONG';      //上一首歌
 const LAST_SONG = 'LAST_SONG';      //下一首歌
 const PAUSE = 'PAUSE';              //暂停、恢复
@@ -25,7 +26,7 @@ export default function (state, action) {
         state = {
             playList: [],           //当前歌单
 
-            currentSong: {},        //当前歌曲信息
+            currentSong: null,      //当前歌曲信息
             currentIndex: 0,        //当前歌曲序号
 
             progressTime: 0,        //当前歌曲进度, 秒
@@ -52,7 +53,7 @@ export default function (state, action) {
                 ...state,
                 playList: [...state.playList, action.songs]
             };
-        case PUSH_SONG:
+        case POINT_SONG:
             let pushSongIndex = -1;
             for (let i = 0; i< state.playList.length; i++) {
                 if (state.playList[i].id === action.song.id) {
@@ -60,12 +61,20 @@ export default function (state, action) {
                     break;
                 }
             }
-            return pushSongIndex !== -1? state:
+            return pushSongIndex !== -1?
+                {
+                    ...state,
+                    currentSong: action.song,
+                    currentIndex: pushSongIndex,
+                    isPlaying: true
+                }
+                :
                 {
                     ...state,
                     playList: [...state.playList, action.song],
                     currentSong: action.song,
-                    currentIndex: pushSongIndex
+                    currentIndex: state.playList.length - 1,
+                    isPlaying: true
                 };
         case DELETE_SONG:
             return {
@@ -80,31 +89,35 @@ export default function (state, action) {
                 ...state,
                 playList: []
             };
-        case CUT_SONG:
-            let cutSongIndex = -1;
-            for (let i = 0; i< state.playList.length; i++) {
-                if (state.playList[i].id === action.song.id) {
-                    cutSongIndex = i;
-                    break;
-                }
-            }
-            return cutSongIndex === -1? state:
-                {
-                    ...state,
-                    currentSong: state.playList[cutSongIndex],
-                    currentIndex: cutSongIndex
-                };
         case NEXT_SONG:
+            if (state.playList.length === 1) {
+                showToast('当前只有一首歌');
+                return state;
+            }
+            if (state.currentIndex + 1 >= state.playList.length) {
+                showToast('已经是最后一首歌了');
+                return state;
+            }
             return {
                 ...state,
                 currentSong: state.playList[state.currentIndex + 1],
-                currentIndex: state.currentIndex + 1
+                currentIndex: state.currentIndex + 1,
+                isPlaying: true
             };
         case LAST_SONG:
+            if (state.playList.length === 1) {
+                showToast('当前只有一首歌');
+                return state;
+            }
+            if (state.currentIndex - 1 < 0) {
+                showToast('已经是第一首歌了');
+                return state;
+            }
             return {
                 ...state,
                 currentSong: state.playList[state.currentIndex - 1],
-                currentIndex: state.currentIndex - 1
+                currentIndex: state.currentIndex - 1,
+                isPlaying: true
             };
         case PAUSE:
             return {

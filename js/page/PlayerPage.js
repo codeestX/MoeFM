@@ -39,7 +39,6 @@ class PlayerPage extends Component {
     }
 
     render() {
-        const { params } = this.props.navigation.state;
         return (
         <PlayerUI
             song={this.props.currentSong}
