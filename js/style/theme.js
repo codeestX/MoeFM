@@ -30,31 +30,3 @@ export const ThemeFlags = {
     BlueGrey:'#607D8B',
     Black:'#000000'
 }
-
-export default class ThemeFactory {
-    // constructor(themeFlag) {
-    //     this.themeFlag = themeFlag;
-    //     this.theme = this.createTheme();
-    // }
-
-    static createTheme(themeFlag) {
-        return {
-            themeColor:themeFlag,
-            styles:StyleSheet.create({
-                selectedTitleStyle:{
-                    color: themeFlag
-                },
-                tabBarSelectedIcon: {
-                    tintColor: themeFlag
-                },
-                navBar:{
-                    backgroundColor:themeFlag,
-                },
-                themeColor:{
-                    color:themeFlag
-                },
-
-            })
-        }
-    }
-}

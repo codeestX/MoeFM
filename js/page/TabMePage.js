@@ -15,13 +15,13 @@ const list = [{
         icon: 'star',
         nav: 'PlayList'
     }, {
-        title: '播放历史',
-        icon: 'history',
-        nav: 'PlayList'
-    }, {
         title: '本地音乐',
         icon: 'file-music',
         nav: 'PlayList'
+    }, {
+        title: '换肤',
+        icon: 'file-music',
+        nav: 'Theme'
     }, {
         title: '设置',
         icon: 'settings',
