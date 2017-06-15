@@ -28,25 +28,13 @@ class PlayerPage extends Component {
         }
     }
 
-    handleLove() {
-        if (this.props.onLove) {
-            this.props.onLove()
-        }
-    }
-
-    handleDownload() {
-
-    }
-
     render() {
         return (
         <PlayerUI
             song={this.props.currentSong}
             onShowList={this.handleShowList.bind(this)}
             onLast={this.handleLast.bind(this)}
-            onNext={this.handleNext.bind(this)}
-            onLove={this.handleLove.bind(this)}
-            onDownload={this.handleDownload.bind(this)}>
+            onNext={this.handleNext.bind(this)}>
         </PlayerUI>
         );
     }
@@ -67,9 +55,6 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({type: 'LAST_SONG'})
         },
         onShowList: () => {
-            dispatch()
-        },
-        onLove: () => {
             dispatch()
         },
     }

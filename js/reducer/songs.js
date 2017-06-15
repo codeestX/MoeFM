@@ -49,9 +49,18 @@ export default function (state, action) {
                 playList: [...state.playList, action.song]
             };
         case ADD_SONGS:
-            return {
+            let diffSongs = action.songs.filter((it) => !state.playList.some((item) => item.id === it.id)); //去重
+            return state.isPlaying?
+            {
                 ...state,
-                playList: [...state.playList, action.songs]
+                playList: [...state.playList, diffSongs]
+            }
+            :
+            {
+                ...state,
+                playList: [...state.playList, diffSongs],
+                isPlaying: true,
+                currentSong: state.playList[0]
             };
         case POINT_SONG:
             let pushSongIndex = -1;

@@ -64,7 +64,7 @@ export default MainScreenNavigator = TabNavigator({
                 display: 'none'
             },
             style: {backgroundColor: '#000000', opacity: 0.85},
-            labelStyle: {fontSize: 9, marginVertical: -2},
+            labelStyle: {fontSize: 9, marginVertical: -1},
         },
     }
 );

@@ -22,13 +22,13 @@ export default RootNavigator = StackNavigator({
             title: 'MoeFM',
             // headerRight: _renderSearchView,
             headerStyle: tabMenuStyle(screenProps),
-            headerTitleStyle: styles.tabTitle,
+            headerTitleStyle: styles.tabTitleCenter,
             headerTintColor: 'white',
         }),},
     Detail: { screen: DetailPage ,
         navigationOptions: ({navigation, screenProps}) => ({
             headerStyle: tabMenuStyle(screenProps),
-            headerTitleStyle: styles.tabTitle,
+            headerTitleStyle: styles.tabTitleLeft,
             headerTintColor: 'white',
         }),},
     Player: { screen: PlayerPage ,
@@ -37,8 +37,9 @@ export default RootNavigator = StackNavigator({
         }),},
     Theme: { screen: ThemePage ,
         navigationOptions: ({navigation, screenProps}) => ({
+            title: 'Colorful Theme',
             headerStyle: tabMenuStyle(screenProps),
-            headerTitleStyle: styles.tabTitle,
+            headerTitleStyle: styles.tabTitleCenter,
             headerTintColor: 'white',
         }),},
 });
@@ -51,9 +52,13 @@ const tabMenuStyle = (screenProps) => {
 };
 
 let styles = StyleSheet.create({
-    tabTitle: {
+    tabTitleCenter: {
         color: 'white',
         alignSelf: 'center'
+    },
+    tabTitleLeft: {
+        color: 'white',
+        alignSelf: 'flex-start'
     },
     transparentTitle: {
         position: 'absolute',

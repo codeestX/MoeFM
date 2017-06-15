@@ -32,6 +32,11 @@ const streamMiddleware = store => next => action => {
         return result;
     }
     switch (actionType) {
+        case ADD_SONGS:
+            if (!thisState.isPlaying && newState.isPlaying && newState.currentSong !== null) {
+                init(newState.currentSong.url);
+            }
+            break;
         case POINT_SONG:
             init(action.song.url);
             break;

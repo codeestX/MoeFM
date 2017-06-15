@@ -23,9 +23,9 @@ export default class RadioListItem extends React.PureComponent {
 
     render() {
         return (
-            <CustomButton onPress={() => this.props.onPress(this.props.song)} disabled={typeof(this.props.song.url) === "undefined"}>
+            <CustomButton onPress={() => this.props.onPress(this.props.song)} disabled={this.props.song.url === undefined}>
                 <View style={this.props.song.url? styles.container: styles.containerNone}>
-                    <Text style={{fontSize: 14, marginLeft: 20}}>{this.props.index}</Text>
+                    <Text style={{fontSize: 14, marginLeft: 20}}>{this.props.index + 1}</Text>
                     <View style={{flexDirection: 'column', marginLeft: 20, flex: 1}}>
                         <Text numberOfLines={1}>{this.props.song.title}</Text>
                         <View style={{flexDirection: 'row', marginTop: 5, alignItems: 'center'}}>

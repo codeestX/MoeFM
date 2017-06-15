@@ -20,6 +20,7 @@ import Api from '../model/api/Api'
 import {
     CoordinatorLayout,
 } from 'react-native-bottom-sheet-behavior'
+import CustomButton from '../component/CustomButton'
 import PlayerUIBottom from '../container/PlayerUIBottom'
 
 class DetailPage extends Component {
@@ -36,9 +37,39 @@ class DetailPage extends Component {
         title: `${navigation.state.params.wiki.title}`,
     });
 
+    parseDataNum() {
+        return this.state.subsData.filter((it) => it.url !== undefined).length
+    }
+
+    handleAddAll() {
+        if (this.props.onAddSongs) {
+            this.props.onAddSongs(this.state.subsData);
+        }
+    }
+
+    renderHeader() {
+        const { params } = this.props.navigation.state;
+        return (
+            <View>
+                <View style={{justifyContent: 'flex-end'}}>
+                    <Image style={{alignSelf: 'stretch'}} source={{uri: params.wiki.cover, height: 240}}/>
+                    <Text style={styles.title} numberOfLines={1}>{params.wiki.title}</Text>
+                </View>
+                {params.wiki.intro !== undefined && <Text style={ styles.intro}>{params.wiki.intro}</Text>}
+                <CustomButton disabled={this.parseDataNum() === 0 } onPress={this.handleAddAll.bind(this)}>
+                    <View style={this.parseDataNum() === 0? styles.addAllContainerNone: styles.addAllContainer}>
+                        <Image style={styles.icon} source={require('../images/bottom_play.png')}/>
+                        <Text style={styles.addAllText}>播放全部</Text>
+                        <Text style={styles.numText}>(共{this.parseDataNum()}首)</Text>
+                    </View>
+                </CustomButton>
+                <Text style={styles.separator}/>
+            </View>
+        );
+    }
+
     render() {
         const { navigate } = this.props.navigation;
-        const { params } = this.props.navigation.state;
         return (
             <CoordinatorLayout style={{flex: 1}}>
                 <FlatList
@@ -51,16 +82,8 @@ class DetailPage extends Component {
                     }}/>}
                     keyExtractor={(item, index) => item.id}
                     ItemSeparatorComponent={() => <Text style={styles.separator}/>}
-                    ListHeaderComponent={() => (
-                        <View>
-                            <View style={{justifyContent: 'flex-end'}}>
-                                <Image style={{alignSelf: 'stretch'}} source={{uri: params.wiki.cover, height: 240}}/>
-                                <Text style={styles.title} numberOfLines={1}>{params.wiki.title}</Text>
-                            </View>
-                            {params.wiki.intro !== undefined && <Text style={ styles.intro}>{params.wiki.intro}</Text>}
-                        </View>
-                    )}/>
-                <PlayerUIBottom onPress={() => navigate('Player')} onList={this.handleHeaderPress}/>
+                    ListHeaderComponent={this.renderHeader.bind(this)}/>
+                <PlayerUIBottom onPress={() => navigate('Player')}/>
             </CoordinatorLayout>
         );
     }
@@ -70,10 +93,6 @@ class DetailPage extends Component {
         const { params } = this.props.navigation.state;
         this.fetchSubsData(params.type, params.wiki.id);
     }
-
-    handleHeaderPress = () => {
-
-    };
 
     async fetchSubsData(type, id) {
         this.setState({refreshing: true});
@@ -102,8 +121,35 @@ const styles = StyleSheet.create({
         marginLeft: 50,
         backgroundColor: GlobalStyles.text_dark_hint,
     },
+    addAllContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#fafafa',
+        paddingVertical: 6
+    },
+    addAllContainerNone: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#e1e1e1',
+        paddingVertical: 6
+    },
     intro: {
         color: GlobalStyles.text_dark_primary
+    },
+    icon: {
+        height: 30,
+        width: 30,
+        marginHorizontal: 12
+    },
+    addAllText: {
+        color: GlobalStyles.text_dark_primary,
+        fontSize: 18
+    },
+    numText: {
+        color: GlobalStyles.text_dark_hint,
+        fontSize: 16
     },
     title: {
         alignSelf: 'flex-start',
