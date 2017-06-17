@@ -5,26 +5,27 @@
  */
 
 import React, {Component} from 'react'
-import {
-    Text,
-} from 'react-native'
 import { List, ListItem } from 'react-native-elements'
 
 const list = [{
         title: '我的收藏',
-        icon: 'star',
+        icon: 'md-star',
         nav: 'PlayList'
     }, {
         title: '本地音乐',
-        icon: 'file-music',
+        icon: 'md-musical-note',
         nav: 'PlayList'
     }, {
+        title: '下载管理',
+        icon: 'md-download',
+        nav: 'Download'
+    }, {
         title: '换肤',
-        icon: 'file-music',
+        icon: 'md-color-palette',
         nav: 'Theme'
     }, {
         title: '设置',
-        icon: 'settings',
+        icon: 'md-settings',
         nav: 'Settings'
     }
 ];
@@ -40,7 +41,7 @@ export default class TabMePage extends Component {
                         <ListItem
                             key={i}
                             title={item.title}
-                            leftIcon={{name: item.icon}}
+                            leftIcon={{name: item.icon, type: 'ionicon'}}
                             onPress={() => navigate(item.nav)}
                         />
                     ))

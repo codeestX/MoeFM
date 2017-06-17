@@ -20,6 +20,7 @@ import CustomButton from '../component/CustomButton'
 import PlayerProgress from '../container/PlayerProgress'
 import PlayButtonBottom from '../container/PlayButtonBottom'
 import PlayList from '../container/PlayList'
+import GlobalStyle from '../style/global'
 
 const { STATE_ANCHOR_POINT, STATE_COLLAPSED } = BottomSheetBehavior;
 
@@ -43,7 +44,7 @@ class PlayerUIBottom extends Component {
         <BottomSheetBehavior
             anchorEnabled
             anchorPoint={230}
-            peekHeight={52}
+            peekHeight={60}
             elevation={8}
             ref={(bottomSheet) => { this.bottomSheet = bottomSheet }}>
             <View style={{backgroundColor:'#FFFFFF'}}>
@@ -52,11 +53,11 @@ class PlayerUIBottom extends Component {
                     backgroundColor={'#FFFFFF'}
                     backgroundColorExpanded={'#FFFFFF'}>
                     <CustomButton onPress={() => this.props.onPress()}>
-                        <View style={{height: 52}}>
+                        <View style={{height: 60}}>
                             <PlayerProgress/>
                             <View style={{flexDirection: 'row', marginVertical: 3, marginHorizontal: 20, alignItems: 'center'}}>
                                 <Image source={{uri: this.props.currentSong.cover, width: 30, height: 30}}/>
-                                <Text style={{flex: 1, marginLeft: 10, maxLength: 14}} numberOfLines={1}>{this.props.currentSong.title}</Text>
+                                <Text style={{flex: 1, marginLeft: 10}} numberOfLines={1}>{this.props.currentSong.title}</Text>
                                 <PlayButtonBottom innerStyle={styles.icon}/>
                                 <CustomButton onPress={this.handleNext.bind(this)}>
                                     <Image style={styles.icon} source={require('../images/bottom_next.png')}/>
@@ -65,6 +66,7 @@ class PlayerUIBottom extends Component {
                                     <Image style={styles.icon} source={require('../images/bottom_list.png')}/>
                                 </CustomButton>
                             </View>
+                            <Text style={{height: 0.5, backgroundColor: 'gray', width: GlobalStyle.window_width}}/>
                         </View>
                     </CustomButton>
                 </BottomSheetHeader>

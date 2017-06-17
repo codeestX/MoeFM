@@ -6,13 +6,9 @@
 
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import {
-    StyleSheet,
-    View,
-    Text,
-} from 'react-native'
 import GlobalStyle from '../style/global'
 import date from '../util/date'
+import ProgressBar from '../component/ProgressBar'
 
 class PlayerProgress extends Component {
 
@@ -21,28 +17,23 @@ class PlayerProgress extends Component {
         totalTime: 0
     };
 
-    getCurrentWidth() {
+    getCurrentValue() {
         if (this.props.progressTime && this.props.totalTime) {
-            return this.props.progressTime * GlobalStyle.window_width / this.props.totalTime;
+            return parseFloat(this.props.progressTime) / this.props.totalTime;
         }
         return 0;
     }
 
     render() {
         return (
-            <View style={styles.progress}>
-                <Text style={{backgroundColor: '#FFFFFF', width: GlobalStyle.window_width, position: 'relative'}}/>
-                <Text style={{backgroundColor: '#FF0000', width: this.getCurrentWidth(), position: 'absolute'}}/>
-            </View>
+            <ProgressBar fillStyle={{height: 3, backgroundColor: 'red'}}
+                         backgroundStyle={{backgroundColor: 'white'}}
+                         style={{width: GlobalStyle.window_width}}
+                         progress={this.getCurrentValue()}/>
+
         )
     }
 }
-
-const styles = StyleSheet.create({
-    progress: {
-        height: 3
-    },
-});
 
 const mapStateToProps = (state) => {
     return {

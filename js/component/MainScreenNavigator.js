@@ -5,6 +5,7 @@
  */
 
 import React from 'react'
+import { Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TabNavigator } from 'react-navigation';
 
@@ -16,37 +17,43 @@ export default MainScreenNavigator = TabNavigator({
         Music: {
             screen: TabMusicPage,
             navigationOptions: ({navigation, screenProps}) => ({
-                tabBarLabel: 'Music',
-                tabBarIcon: ({ tintColor }) => (
+                tabBarIcon: ({ focused, tintColor }) => (
                     <Icon
                         name={'md-musical-notes'}
                         size={26}
-                        color={tintColor}
+                        color={focused? screenProps.themeColor: tintColor}
                     />
                 ),
+                tabBarLabel: ({ focused, tintColor }) => (
+                    <Text style={{fontSize: 12, color: focused? screenProps.themeColor: tintColor}}>Music</Text>
+                )
             }),},
         Radio: {
             screen: TabRadioPage,
             navigationOptions: ({navigation, screenProps}) => ({
-                tabBarLabel: 'Radio',
-                tabBarIcon: ({ tintColor }) => (
+                tabBarIcon: ({ focused, tintColor }) => (
                     <Icon
                         name={'md-radio'}
                         size={26}
-                        color={tintColor}
+                        color={focused? screenProps.themeColor: tintColor}
                     />
                 ),
+                tabBarLabel: ({ focused, tintColor }) => (
+                    <Text style={{fontSize: 12, color: focused? screenProps.themeColor: tintColor}}>Radio</Text>
+                )
             }),},
         Me: { screen: TabMePage,
             navigationOptions: ({navigation, screenProps}) => ({
-                tabBarLabel: 'Me',
-                tabBarIcon: ({ tintColor }) => (
+                tabBarIcon: ({ focused, tintColor }) => (
                     <Icon
                         name={'md-person'}
                         size={26}
-                        color={tintColor}
+                        color={focused? screenProps.themeColor: tintColor}
                     />
                 ),
+                tabBarLabel: ({ focused, tintColor }) => (
+                    <Text style={{fontSize: 12, color: focused? screenProps.themeColor: tintColor}}>Me</Text>
+                )
             }),},
     }, {
         // tabBarComponent: TabView.TabBarBottom,
@@ -55,15 +62,15 @@ export default MainScreenNavigator = TabNavigator({
         animationEnabled: true,
         lazy: true,
         tabBarOptions: {
-            activeTintColor: 'white',
-            inactiveTintColor: '#D0D0D0',
+            activeTintColor: 'black',
+            inactiveTintColor: 'gray',
             showIcon: true,
             showLabel: true,
             indicatorStyle: {
                 opacity: 0,
                 display: 'none'
             },
-            style: {backgroundColor: '#000000', opacity: 0.85},
+            style: {backgroundColor: '#EEEEEE', opacity: 0.85},
             labelStyle: {fontSize: 9, marginVertical: -1},
         },
     }
