@@ -101,12 +101,16 @@ class DetailPage extends Component {
         if (type === 'music') {
             //music
             let songs = result.response.subs;
+            if (songs === null || songs.length === 0)
+                return;
             for (let i = 0, len = songs.length; i < len; i++) {
                 songData.push(new Song(songs[i]));
             }
         } else {
             //radio
             let songs = result.response.relationships;
+            if (songs === null || songs.length === 0)
+                return;
             for (let i = 0, len = songs.length; i < len; i++) {
                 songData.push(new Song(songs[i].obj));
             }

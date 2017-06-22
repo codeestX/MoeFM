@@ -13,7 +13,6 @@ LovedSong.schema = {
     name:'LovedSong',
     primaryKey: 'id',
     properties: {
-        index: {type: 'int'},
         id: {type: 'int'},
         title: {type: 'string'},
         date: {type: 'int'},
@@ -31,7 +30,6 @@ LocalSong.schema = {
     name:'LocalSong',
     primaryKey: 'id',
     properties: {
-        index: {type: 'int'},
         id: {type: 'int'},
         title: {type: 'string'},
         date: {type: 'int'},

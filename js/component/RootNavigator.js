@@ -15,6 +15,7 @@ import MainScreenNavigator from './MainScreenNavigator'
 import DetailPage from '../page/DetailPage'
 import PlayerPage from '../page/PlayerPage'
 import ThemePage from '../page/ThemePage'
+import DownloadPage from '../page/DownloadPage'
 
 export default RootNavigator = StackNavigator({
     Home: { screen: MainScreenNavigator ,
@@ -38,6 +39,13 @@ export default RootNavigator = StackNavigator({
     Theme: { screen: ThemePage ,
         navigationOptions: ({navigation, screenProps}) => ({
             title: 'Colorful Theme',
+            headerStyle: tabMenuStyle(screenProps),
+            headerTitleStyle: styles.tabTitleCenter,
+            headerTintColor: 'white',
+        }),},
+    Download: { screen: DownloadPage ,
+        navigationOptions: ({navigation, screenProps}) => ({
+            title: 'Download Task List',
             headerStyle: tabMenuStyle(screenProps),
             headerTitleStyle: styles.tabTitleCenter,
             headerTintColor: 'white',

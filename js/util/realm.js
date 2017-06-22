@@ -12,7 +12,6 @@ export default class Realm {
         console.log(song);
         realm.write(()=>{
             realm.create('LovedSong',{
-                index: song.index,
                 id: song.id,
                 title: song.title,
                 date: song.date,
@@ -43,7 +42,6 @@ export default class Realm {
     static insertLocaledSong(song) {
         realm.write(()=>{
             realm.create('LocalSong',{
-                index: song.index,
                 id: song.id,
                 title: song.title,
                 date: song.date,

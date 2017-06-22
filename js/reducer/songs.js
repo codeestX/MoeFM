@@ -151,21 +151,46 @@ export default function (state, action) {
             };
         }
         case LOVE: {
+            // return {
+            //     ...state,
+            //     currentSong: {
+            //         ...state.currentSong,
+            //         isLoved: !state.currentSong.isLoved
+            //     }
+            // }
             return {
                 ...state,
-                currentSong: {
+                playList: state.playList.map((item, index) => {
+                    if(state.playList[index].id !== action.song.id) {
+                        return item;
+                    }
+                    return {
+                        ...item,
+                        isLoved: !item.isLoved
+                    };
+                }),
+                currentSong: action.song.id === state.currentSong.id? {
                     ...state.currentSong,
                     isLoved: !state.currentSong.isLoved
-                }
+                }: state.currentSong
             }
         }
         case LOCAL: {
             return {
                 ...state,
-                currentSong: {
+                playList: state.playList.map((item, index) => {
+                    if(state.playList[index].id !== action.song.id) {
+                        return item;
+                    }
+                    return {
+                        ...item,
+                        isLocaled: !item.isLocaled
+                    };
+                }),
+                currentSong: action.song.id === state.currentSong.id? {
                     ...state.currentSong,
                     isLocaled: !state.currentSong.isLocaled
-                }
+                }: state.currentSong
             }
         }
         default:

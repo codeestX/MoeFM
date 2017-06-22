@@ -11,17 +11,20 @@ import { Provider } from 'react-redux'
 import ThemeApp from '../container/ThemeApp'
 import songs from  '../reducer/songs'
 import themes from  '../reducer/themes'
+import downloads from  '../reducer/downloads'
 import playerMiddleware from '../middleware/player'
 import streamMiddleware from '../middleware/stream'
+import downloadMiddleware from '../middleware/downloader'
 
 
 const rootReducer = combineReducers({
+    downloads,
     songs,
     themes,
 });
 
 const store = createStore(rootReducer,
-    applyMiddleware(streamMiddleware));
+    applyMiddleware(streamMiddleware, downloadMiddleware));
 
 export default class MainPage extends Component {
 

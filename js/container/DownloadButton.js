@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 import {
     Image,
 } from 'react-native'
-import realm from '../util/realm'
 import CustomButton from '../component/CustomButton'
 
 class DownloadButton extends Component {
@@ -18,17 +17,13 @@ class DownloadButton extends Component {
         return isLoved? require('../images/ic_downloaded.png'): require('../images/ic_download.png');
     }
 
-    handleLocal() {
+    async handleLocal() {
         if (this.props.currentSong) {
-            if (this.props.currentSong.isLocaled) {
-                realm.deleteLocaledSong(this.props.currentSong.id);
-            } else {
-                realm.insertLocaledSong(this.props.currentSong);
-                //Download
+            if (!this.props.currentSong.isLocaled) {
+                if (this.props.onPreTask) {
+                    this.props.onPreTask(this.props.currentSong);
+                }
             }
-        }
-        if (this.props.onDownload) {
-            this.props.onDownload();
         }
     }
 
@@ -49,8 +44,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onDownload: () => {
-            dispatch({type: 'LOCAL'})
+        onPreTask: (currentSong) => {
+            dispatch({type: 'PRE_TASK', song: currentSong})
         }
     }
 };

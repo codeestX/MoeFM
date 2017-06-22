@@ -55,7 +55,7 @@ class PlayerUIBottom extends Component {
                     <CustomButton onPress={() => this.props.onPress()}>
                         <View style={{height: 60}}>
                             <PlayerProgress/>
-                            <View style={{flexDirection: 'row', marginVertical: 3, marginHorizontal: 20, alignItems: 'center'}}>
+                            <View style={{flexDirection: 'row', marginVertical: 3, paddingHorizontal: 20, alignItems: 'center'}}>
                                 <Image source={{uri: this.props.currentSong.cover, width: 30, height: 30}}/>
                                 <Text style={{flex: 1, marginLeft: 10}} numberOfLines={1}>{this.props.currentSong.title}</Text>
                                 <PlayButtonBottom innerStyle={styles.icon}/>

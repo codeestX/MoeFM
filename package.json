@@ -13,6 +13,7 @@
     "react-native-blur": "^3.0.0-alpha",
     "react-native-bottom-sheet-behavior": "^1.0.0-beta.5",
     "react-native-elements": "^0.11.2",
+    "react-native-fs": "^2.3.3",
     "react-native-root-toast": "^1.1.2",
     "react-native-sound": "github:ndbroadbent/react-native-sound#android-url-fix",
     "react-native-vector-icons": "^4.0.1",

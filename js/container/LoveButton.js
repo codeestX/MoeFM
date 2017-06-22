@@ -25,9 +25,9 @@ class LoveButton extends Component {
             } else {
                 realm.insertLovedSong(this.props.currentSong);
             }
-        }
-        if (this.props.onLove) {
-            this.props.onLove();
+            if (this.props.onLove) {
+                this.props.onLove(this.props.currentSong);
+            }
         }
     }
 
@@ -48,8 +48,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLove: () => {
-            dispatch({type: 'LOVE'})
+        onLove: (song) => {
+            dispatch({type: 'LOVE', song: song})
         }
     }
 };
