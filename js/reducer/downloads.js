@@ -27,7 +27,7 @@ export default function (state, action) {
                     }
                     return {
                         ...item,
-                        ...action.progressCallback
+                        progressCallback: action.progressCallback
                     };
                 })
             };

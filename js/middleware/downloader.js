@@ -54,7 +54,6 @@ const progressCallback = (callback) => {
 
 const resultCallback = (result) => {
     storeInstance.dispatch({type: FINISH_TASK, jobId: result.jobId});
-    //记录到realm
 };
 
 async function createTask(song) {

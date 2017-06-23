@@ -42,7 +42,7 @@ let ProgressBar = React.createClass({
     },
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.progress >= 0 && this.props.progress != prevProps.progress) {
+        if (this.props.progress >= 0 && this.props.progress !== prevProps.progress) {
             this.update();
         }
     },
@@ -51,7 +51,7 @@ let ProgressBar = React.createClass({
 
         let fillWidth = this.state.progress.interpolate({
             inputRange: [0, 1],
-            outputRange: [0 * this.props.style.width, 1 * this.props.style.width],
+            outputRange: [0, 1 * this.props.style.width],
         });
 
         return (

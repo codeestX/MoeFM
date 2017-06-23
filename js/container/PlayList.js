@@ -24,7 +24,7 @@ class PlayList extends Component {
     }
 
     handleDelete(index) {
-        if (this.props.onDelete()) {
+        if (this.props.onDelete) {
             this.props.onDelete(index)
         }
     }

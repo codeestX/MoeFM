@@ -29,7 +29,7 @@ class DetailPage extends Component {
         super(props);
         this.state = {
             subsData: [],
-            refreshing: false
+            refreshing: false,
         };
     }
 

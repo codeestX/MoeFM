@@ -17,6 +17,8 @@ class DownloadProgress extends Component {
 
     getCurrentValue() {
         if (this.props.progressCallback) {
+            console.log(this.props.progressCallback.bytesWritten + "//" + this.props.progressCallback.contentLength);
+            console.log(parseFloat(this.props.progressCallback.bytesWritten) / this.props.progressCallback.contentLength);
             return parseFloat(this.props.progressCallback.bytesWritten) / this.props.progressCallback.contentLength;
         }
         return 0;
@@ -26,7 +28,6 @@ class DownloadProgress extends Component {
         return (
             <ProgressBar fillStyle={{height: 3, backgroundColor: 'red'}}
                          backgroundStyle={{backgroundColor: 'white'}}
-                         style={{width: GlobalStyle.window_width}}
                          progress={this.getCurrentValue()}/>
 
         )

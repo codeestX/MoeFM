@@ -55,7 +55,7 @@ class PlayerUIBottom extends Component {
                     <CustomButton onPress={() => this.props.onPress()}>
                         <View style={{height: 60}}>
                             <PlayerProgress/>
-                            <View style={{flexDirection: 'row', marginVertical: 3, paddingHorizontal: 20, alignItems: 'center'}}>
+                            <View style={styles.headerContainer}>
                                 <Image source={{uri: this.props.currentSong.cover, width: 30, height: 30}}/>
                                 <Text style={{flex: 1, marginLeft: 10}} numberOfLines={1}>{this.props.currentSong.title}</Text>
                                 <PlayButtonBottom innerStyle={styles.icon}/>
@@ -82,6 +82,12 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
     },
+    headerContainer: {
+        flexDirection: 'row',
+        marginBottom: 10,
+        paddingHorizontal: 20,
+        alignItems: 'center'
+    }
 });
 
 const mapStateToProps = (state) => {
