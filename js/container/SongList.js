@@ -33,7 +33,7 @@ class SongList extends Component {
 
     handleAddAll() {
         if (this.props.onAddSongs) {
-            this.props.onAddSongs(this.props.subsData);
+            this.props.onAddSongs(this.props.subsData.filter((it) => it.url !== undefined));
         }
     }
 
@@ -125,7 +125,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({type: 'POINT_SONG', song: song});
         },
         onAddSongs: (songs) => {
-            dispatch({type: 'ADD_SONGS', song: songs})
+            console.log(songs);
+            dispatch({type: 'ADD_SONGS', songs: songs})
         }
     }
 };

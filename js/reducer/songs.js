@@ -53,14 +53,14 @@ export default function (state, action) {
             return state.isPlaying?
             {
                 ...state,
-                playList: [...state.playList, diffSongs]
+                playList: state.playList.concat(diffSongs)
             }
             :
             {
                 ...state,
-                playList: [...state.playList, diffSongs],
+                playList: state.playList.concat(diffSongs),
                 isPlaying: true,
-                currentSong: state.playList[0]
+                currentSong: diffSongs[0]
             };
         case POINT_SONG:
             let pushSongIndex = -1;

@@ -35,7 +35,7 @@ class PlayList extends Component {
                 <FlatList
                     data={this.props.playList}
                     renderItem={({item, index}) => <Item song={item} index={index} isSelected={this.props.currentIndex === index}
-                                                         onPress={this.handlePoint} onDelete={this.handleDelete} />}
+                                                         onPress={this.handlePoint.bind(this)} onDelete={this.handleDelete.bind(this)} />}
                     ItemSeparatorComponent={() => <Text style={styles.separator}/>}
                     keyExtractor={(item, index) => item.id}
                 />

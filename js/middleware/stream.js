@@ -33,27 +33,27 @@ const streamMiddleware = store => next => action => {
     }
     switch (actionType) {
         case ADD_SONGS:
-            if (!thisState.isPlaying && newState.isPlaying && newState.currentSong !== null) {
-                init(newState.currentSong.url);
+            if (!thisState.songs.isPlaying && newState.songs.isPlaying && newState.songs.currentSong !== null) {
+                init(newState.songs.currentSong.url);
             }
             break;
         case POINT_SONG:
             init(action.song.url);
             break;
         case NEXT_SONG:
-            init(newState.playList[newState.currentIndex].url);
+            init(newState.songs.playList[newState.currentIndex].url);
             break;
         case LAST_SONG:
-            init(newState.playList[newState.currentIndex].url);
+            init(newState.songs.playList[newState.currentIndex].url);
             break;
         case PAUSE:
-            play(newState.isPlaying);
+            play(newState.songs.isPlaying);
             break;
         case SWITCH_MODE:
             //记录播放模式
             break;
         case SEEK_PROGRESS:
-            seek(newState.progressTime);
+            seek(newState.songs.progressTime);
             break;
     }
     return result;

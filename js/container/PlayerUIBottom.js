@@ -37,7 +37,7 @@ class PlayerUIBottom extends Component {
     };
 
     render() {
-        if (this.props.currentSong === null) {
+        if (this.props.currentSong === null || this.props.currentSong === undefined) {
             return null;
         }
         return (
