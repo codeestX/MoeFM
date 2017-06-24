@@ -9,7 +9,6 @@ import realm from '../model/db/Schema';
 export default class Realm {
 
     static insertLovedSong(song) {
-        console.log(song);
         realm.write(()=>{
             realm.create('LovedSong',{
                 id: song.id,
@@ -28,7 +27,6 @@ export default class Realm {
 
     static deleteLovedSong(id) {
         realm.write(() => {
-            // let target = realm.create('LovedSong', {id: id});
             const target = realm.objects('LovedSong').filtered('id = ' + id);
             realm.delete(target);
         });
@@ -37,6 +35,11 @@ export default class Realm {
     static queryLovedSong(id) {
         const target = realm.objects('LovedSong').filtered('id = ' + id);
         return target !== null && target.length > 0;
+    }
+
+    static findAllLovedSong() {
+        //Results => Array
+        return realm.objects('LovedSong').map(x => Object.assign({}, x));
     }
 
     static insertLocaledSong(song) {

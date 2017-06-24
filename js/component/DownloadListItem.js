@@ -16,16 +16,12 @@ import DownloadProgress from '../container/DownloadProgress'
 
 export default class DownloadListItem extends React.PureComponent {
 
-    static defaultProps = {
-        isSelected: false,
-    };
-
     render() {
         return (
             <CustomButton onPress={() => this.props.onPress(this.props.task.song)}>
                 <View style={styles.container}>
                     <View style={{flex: 1, justifyContent: 'center'}}>
-                        <Text style={{marginHorizontal: 3}} numberOfLines={1}>{this.props.task.song.title}</Text>
+                        <Text style={{marginBottom: 3}} numberOfLines={1}>{this.props.task.song.title}</Text>
                         <DownloadProgress jobId={this.props.task.jobId}/>
                     </View>
                     <CustomButton onPress={() => this.props.onDelete(this.props.task.jobId)}>
@@ -42,8 +38,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: 'white',
-        paddingVertical: 5,
-        paddingHorizontal: 12
+        paddingVertical: 16,
+        paddingHorizontal: 20
     },
     icon: {
         width: 20,

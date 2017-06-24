@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
         color: GlobalStyles.text_light_primary,
         fontSize: 26,
         paddingTop: 20,
+        marginHorizontal: 30
     },
     func: {
         flexDirection: 'row',

@@ -44,16 +44,15 @@ class PlayerUIBottom extends Component {
         <BottomSheetBehavior
             anchorEnabled
             anchorPoint={230}
-            peekHeight={60}
+            peekHeight={55}
             elevation={8}
             ref={(bottomSheet) => { this.bottomSheet = bottomSheet }}>
-            <View style={{backgroundColor:'#FFFFFF'}}>
+            <View style={{backgroundColor:'white'}}>
                 <BottomSheetHeader
-                    textColorExpanded={'#FFFFFF'}
-                    backgroundColor={'#FFFFFF'}
-                    backgroundColorExpanded={'#FFFFFF'}>
+                    backgroundColor={'white'}
+                    backgroundColorExpanded={'white'}>
                     <CustomButton onPress={() => this.props.onPress()}>
-                        <View style={{height: 60}}>
+                        <View style={{height: 55}}>
                             <PlayerProgress/>
                             <View style={styles.headerContainer}>
                                 <Image source={{uri: this.props.currentSong.cover, width: 30, height: 30}}/>
@@ -66,7 +65,7 @@ class PlayerUIBottom extends Component {
                                     <Image style={styles.icon} source={require('../images/bottom_list.png')}/>
                                 </CustomButton>
                             </View>
-                            <Text style={{height: 0.5, backgroundColor: 'gray', width: GlobalStyle.window_width}}/>
+                            <Text style={{height: 0.5, backgroundColor: 'gray', width: GlobalStyle.window_width, marginTop: 3}}/>
                         </View>
                     </CustomButton>
                 </BottomSheetHeader>
@@ -84,7 +83,7 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         flexDirection: 'row',
-        marginBottom: 10,
+        marginVertical: 3,
         paddingHorizontal: 20,
         alignItems: 'center'
     }

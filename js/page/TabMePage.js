@@ -10,11 +10,11 @@ import { List, ListItem } from 'react-native-elements'
 const list = [{
         title: '我的收藏',
         icon: 'md-star',
-        nav: 'PlayList'
+        nav: 'LoveList'
     }, {
         title: '本地音乐',
         icon: 'md-musical-note',
-        nav: 'PlayList'
+        nav: 'LocalList'
     }, {
         title: '下载管理',
         icon: 'md-download',
