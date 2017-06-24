@@ -17,6 +17,7 @@ import PlayerPage from '../page/PlayerPage'
 import ThemePage from '../page/ThemePage'
 import DownloadPage from '../page/DownloadPage'
 import LoveListPage from '../page/LoveListPage'
+import LocalListPage from '../page/LocalListPage'
 
 export default RootNavigator = StackNavigator({
     Home: { screen: MainScreenNavigator ,
@@ -53,7 +54,14 @@ export default RootNavigator = StackNavigator({
         }),},
     LoveList: { screen: LoveListPage ,
         navigationOptions: ({navigation, screenProps}) => ({
-            title: 'My favorite',
+            title: 'My favorites List',
+            headerStyle: tabMenuStyle(screenProps),
+            headerTitleStyle: styles.tabTitleCenter,
+            headerTintColor: 'white',
+        }),},
+    LocalList: { screen: LocalListPage ,
+        navigationOptions: ({navigation, screenProps}) => ({
+            title: 'Local Music List',
             headerStyle: tabMenuStyle(screenProps),
             headerTitleStyle: styles.tabTitleCenter,
             headerTintColor: 'white',

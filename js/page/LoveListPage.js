@@ -35,7 +35,7 @@ export default class LoveListPage extends Component {
         this.fetchLoveData();
     }
 
-    async fetchLoveData() {
+    fetchLoveData() {
         let lovedSongs = RealmUtil.findAllLovedSong();
         this.setState({subsData: lovedSongs});
     }
