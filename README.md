@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-MoeFM, A light MusicPlayer build with React Native & Redux
+MoeFM, A light MusicPlayer build with React Native & Redux  
 MoeFM，一个由ReactNative和Redux构筑的轻量级音乐播放器
 
 Note: Currently, this project is still under construction and only support Android.
@@ -24,7 +24,7 @@ Note: Currently, this project is still under construction and only support Andro
 
 # Usage
 
-Step 1. Download this project
+Step 1. `git clone https://github.com/codeestX/MoeFM.git`
    
 Step 2.  
 `cd MoeFM`  
