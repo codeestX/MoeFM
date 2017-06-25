@@ -45,9 +45,11 @@ export default class LocalListPage extends Component {
 
     renderItem(item) {
         return (
-            <CustomButton style={styles.itemContainer} onPress={() => this.playMusic(item.path)}>
-                <Text style={styles.itemText} numberOfLines={1}>{item.name}</Text>
-                <Text style={styles.itemText} numberOfLines={1}>{item.path}</Text>
+            <CustomButton onPress={() => this.playMusic(item.path)}>
+                <View style={styles.itemContainer}>
+                    <Text style={styles.itemText} numberOfLines={1}>{item.name}</Text>
+                    <Text style={styles.itemText} numberOfLines={1}>{item.path}</Text>
+                </View>
             </CustomButton>
         )
     }
@@ -56,7 +58,7 @@ export default class LocalListPage extends Component {
         const { navigate } = this.props.navigation;
         return (
             <View>
-                <Text style={{padding: 5}}>仅扫描文件，暂不支持播放</Text>
+                <Text style={{padding: 5}}>扫描结果如下：</Text>
                 <FlatList
                     data={this.state.data}
                     renderItem={({item}) => this.renderItem(item)}

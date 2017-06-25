@@ -21,6 +21,11 @@ const SEEK_PROGRESS = 'SEEK_PROGRESS';          //指定进度
 const LOVE = 'LOVE';            //点击喜欢
 const LOCAL = 'LOCAL';          //点击下载
 
+//playMode
+const LOOP_MODE = 'loop';
+const ONE_MODE = 'one';
+const SHUFFLE_MODE = 'shuffle';
+
 export default function (state, action) {
     if (!state) {
         state = {
@@ -107,6 +112,35 @@ export default function (state, action) {
                 showToast('已经是最后一首歌了');
                 return state;
             }
+            switch (state.playMode) {
+                case LOOP_MODE: //顺序播放
+                    return {
+                        ...state,
+                        currentSong: state.playList[state.currentIndex + 1],
+                        currentIndex: state.currentIndex + 1,
+                        isPlaying: true
+                    };
+                    break;
+                case ONE_MODE:  //单曲循环
+                    return {
+                        ...state,
+                        currentSong: state.playList[state.currentIndex],
+                        currentIndex: state.currentIndex,
+                        isPlaying: true
+                    };
+                    break;
+                case SHUFFLE_MODE:  //随机播放
+                    let randomIndex = parseInt(Math.random() * state.playList.length);
+                    return {
+                        ...state,
+                        currentSong: state.playList[randomIndex],
+                        currentIndex: randomIndex,
+                        isPlaying: true
+                    };
+                    break;
+            }
+
+
             return {
                 ...state,
                 currentSong: state.playList[state.currentIndex + 1],
@@ -151,13 +185,6 @@ export default function (state, action) {
             };
         }
         case LOVE: {
-            // return {
-            //     ...state,
-            //     currentSong: {
-            //         ...state.currentSong,
-            //         isLoved: !state.currentSong.isLoved
-            //     }
-            // }
             return {
                 ...state,
                 playList: state.playList.map((item, index) => {
@@ -200,11 +227,11 @@ export default function (state, action) {
 
 function getPlayMode(mode) {
     switch (mode) {
-        case 'loop':
-            return 'one';
-        case 'one':
-            return 'shuffle';
-        case 'shuffle':
-            return 'loop';
+        case LOOP_MODE:
+            return ONE_MODE;
+        case ONE_MODE:
+            return SHUFFLE_MODE;
+        case SHUFFLE_MODE:
+            return LOOP_MODE;
     }
 }

@@ -49,9 +49,6 @@ const streamMiddleware = store => next => action => {
         case PAUSE:
             play(newState.songs.isPlaying);
             break;
-        case SWITCH_MODE:
-            //记录播放模式
-            break;
         case SEEK_PROGRESS:
             seek(newState.songs.progressTime);
             break;

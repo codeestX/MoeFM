@@ -50,9 +50,6 @@ const playerMiddleware = store => next => action => {
         case PAUSE:
             play(newState.songs.isPlaying);
             break;
-        case SWITCH_MODE:
-            //记录播放模式
-            break;
         case SEEK_PROGRESS:
             seek(newState.songs.progressTime);
             break;
@@ -75,7 +72,6 @@ const init = (url) => {
             console.log('failed to load the sound', e);
             return;
         }
-        // play(false);
         setTimeout(() => play(false), 200);
         startProgress();
     });
