@@ -29,25 +29,32 @@ const playerMiddleware = store => next => action => {
     const result = next(action);
     const newState = store.getState();
     const actionType = String(action.type);
-
+    if (newState === thisState) {
+        return result;
+    }
     switch (actionType) {
+        case ADD_SONGS:
+            if (!thisState.songs.isPlaying && newState.songs.isPlaying && newState.songs.currentSong !== null) {
+                init(newState.songs.currentSong.url);
+            }
+            break;
         case POINT_SONG:
             init(action.song.url);
             break;
         case NEXT_SONG:
-            init(newState.playList[newState.currentIndex].url);
+            init(newState.songs.currentSong.url);
             break;
         case LAST_SONG:
-            init(newState.playList[newState.currentIndex].url);
+            init(newState.songs.currentSong.url);
             break;
         case PAUSE:
-            play(newState.isPlaying);
+            play(newState.songs.isPlaying);
             break;
         case SWITCH_MODE:
             //记录播放模式
             break;
         case SEEK_PROGRESS:
-            seek(newState.progressTime);
+            seek(newState.songs.progressTime);
             break;
     }
     return result;
@@ -69,7 +76,7 @@ const init = (url) => {
             return;
         }
         // play(false);
-        setTimeout(play(false), 200);
+        setTimeout(() => play(false), 200);
         startProgress();
     });
 };

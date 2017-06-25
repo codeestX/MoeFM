@@ -23,7 +23,8 @@ export default class PlayItem extends React.PureComponent {
         return (
             <CustomButton onPress={() => this.props.onPress(this.props.song)}>
                 <View style={styles.container}>
-                    {this.props.isSelected && <Image style={styles.icon} source={require('../images/ic_volumn.png')}/>}
+                    {this.props.isSelected && <Image style={styles.icon} source={require('../images/ic_volumn.png')}
+                                                     width={18} height={18} />}
                     <Text style={{color: this.props.isSelected? 'red': 'black', flex: 1, marginHorizontal: 3}} numberOfLines={1}>{this.props.song.title}</Text>
                     <CustomButton onPress={() => this.props.onDelete(this.props.index)}>
                         <Image style={styles.icon} source={require('../images/ic_close.png')}/>

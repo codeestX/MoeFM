@@ -11,7 +11,9 @@ import {
     View,
     StyleSheet
 } from 'react-native'
+import CustomButton from '../component/CustomButton'
 let RNFS = require('react-native-fs');
+let Sound = require('react-native-sound');
 
 const MoeFMPath = RNFS.ExternalStorageDirectoryPath + '/MoeFM';
 const NetEaseMusicPath = RNFS.ExternalStorageDirectoryPath + '/netease/cloudmusic/Music';
@@ -28,12 +30,25 @@ export default class LocalListPage extends Component {
         };
     }
 
+    playMusic(path) {
+        let sound = new Sound(path, '', (error) => {
+            if (error) {
+                console.log(error);
+            }
+        });
+        setTimeout(() => {
+            sound.play((success) => {
+
+            });
+        }, 100);
+    }
+
     renderItem(item) {
         return (
-            <View style={styles.itemContainer}>
+            <CustomButton style={styles.itemContainer} onPress={() => this.playMusic(item.path)}>
                 <Text style={styles.itemText} numberOfLines={1}>{item.name}</Text>
                 <Text style={styles.itemText} numberOfLines={1}>{item.path}</Text>
-            </View>
+            </CustomButton>
         )
     }
 

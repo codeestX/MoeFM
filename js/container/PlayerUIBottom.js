@@ -49,6 +49,7 @@ class PlayerUIBottom extends Component {
             ref={(bottomSheet) => { this.bottomSheet = bottomSheet }}>
             <View style={{backgroundColor:'white'}}>
                 <BottomSheetHeader
+                    textColorExpanded={'black'}
                     backgroundColor={'white'}
                     backgroundColorExpanded={'white'}>
                     <CustomButton onPress={() => this.props.onPress()}>

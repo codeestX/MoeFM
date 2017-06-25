@@ -15,7 +15,7 @@
     "react-native-elements": "^0.11.2",
     "react-native-fs": "^2.3.3",
     "react-native-root-toast": "^1.1.2",
-    "react-native-sound": "github:ndbroadbent/react-native-sound#android-url-fix",
+    "react-native-sound": "github:zmxv/react-native-sound#fix_android_network_sound",
     "react-native-vector-icons": "^4.0.1",
     "react-navigation": "^1.0.0-beta.9",
     "react-redux": "^5.0.4",

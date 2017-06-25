@@ -34,17 +34,17 @@ const streamMiddleware = store => next => action => {
     switch (actionType) {
         case ADD_SONGS:
             if (!thisState.songs.isPlaying && newState.songs.isPlaying && newState.songs.currentSong !== null) {
-                init(newState.songs.currentSong.url);
+                init(newState.songs.currentSong.url, newState.songs.isPlaying);
             }
             break;
         case POINT_SONG:
-            init(action.song.url);
+            init(action.song.url, newState.songs.isPlaying);
             break;
         case NEXT_SONG:
-            init(newState.songs.playList[newState.currentIndex].url);
+            init(newState.songs.playList[newState.currentIndex].url, newState.songs.isPlaying);
             break;
         case LAST_SONG:
-            init(newState.songs.playList[newState.currentIndex].url);
+            init(newState.songs.playList[newState.currentIndex].url, newState.songs.isPlaying);
             break;
         case PAUSE:
             play(newState.songs.isPlaying);
@@ -64,8 +64,12 @@ export default streamMiddleware;
 let progressCountDown;
 let currentTime = 0;
 
-const init = (url) => {
+const init = (url, isPlaying) => {
     console.log('url: '+ url);
+    if (url === undefined) return;
+    if (isPlaying) {
+        ReactNativeAudioStreaming.stop();
+    }
     ReactNativeAudioStreaming.play(url, {showIniOSMediaCenter: true, showInAndroidNotifications: true});
     startProgress();
 };
@@ -91,6 +95,13 @@ const startProgress = () => {
             stopProgress();
             storeInstance.dispatch({type: NEXT_SONG});
         }
+        ReactNativeAudioStreaming.getStatus((error, info) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(info);
+            }
+        });
     },1000);
 };
 
