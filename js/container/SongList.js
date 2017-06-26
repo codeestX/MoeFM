@@ -15,11 +15,8 @@ import {
 import { connect } from 'react-redux'
 import Item from '../component/SongItem'
 import GlobalStyles from  '../style/global'
-import {
-    CoordinatorLayout,
-} from 'react-native-bottom-sheet-behavior'
 import CustomButton from '../component/CustomButton'
-import PlayerUIBottom from '../container/PlayerUIBottom'
+import PlayerUIBottom from './PlayerUIBottom'
 
 class SongList extends Component {
 
@@ -59,8 +56,9 @@ class SongList extends Component {
 
     render() {
         return (
-            <CoordinatorLayout style={{flex: 1}}>
+            <View style={{flex: 1}}>
                 <FlatList
+                    style={{flex: 1}}
                     data={this.props.subsData}
                     renderItem={({item, index}) => <Item song={item} index={index} onPress={(song) => {
                         if (this.props.onPushSong) {
@@ -72,7 +70,7 @@ class SongList extends Component {
                     ItemSeparatorComponent={() => <Text style={styles.separator}/>}
                     ListHeaderComponent={this.renderHeader.bind(this)}/>
                 <PlayerUIBottom onPress={this.props.onNavPlayPage}/>
-            </CoordinatorLayout>
+            </View>
         );
     }
 }
@@ -80,7 +78,6 @@ class SongList extends Component {
 const styles = StyleSheet.create({
     separator : {
         height: 0.5,
-        marginLeft: 50,
         backgroundColor: GlobalStyles.text_dark_hint,
     },
     addAllContainer: {

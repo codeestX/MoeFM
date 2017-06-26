@@ -72,13 +72,13 @@ const init = (url) => {
             console.log('failed to load the sound', e);
             return;
         }
-        setTimeout(() => play(false), 200);
+        setTimeout(() => play(true), 200);
         startProgress();
     });
 };
 
 const play = (isPlaying) => {
-    if (isPlaying) {
+    if (!isPlaying) {
         singletonSong.pause();
         stopProgress();
     } else {

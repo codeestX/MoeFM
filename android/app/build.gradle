@@ -136,8 +136,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-interactable')
     compile project(':react-native-fs')
-    compile project(':react-native-bottom-sheet-behavior')
     compile project(':realm')
     compile project(':react-native-blur')
     compile project(':react-native-vector-icons')

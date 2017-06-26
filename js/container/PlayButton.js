@@ -16,9 +16,9 @@ class PlayButton extends Component {
     getPlayIcon(isPlaying) {
         switch (isPlaying) {
             case true:
-                return require('../images/ic_play.png');
-            case false:
                 return require('../images/ic_pause.png');
+            case false:
+                return require('../images/ic_play.png');
         }
     }
 

@@ -29,12 +29,20 @@ class PlayList extends Component {
         }
     }
 
+    getCurrentIndex = () => {
+        if (this.props.currentSong && this.props.playList) {
+            let index = this.props.playList.findIndex((it) => it.id === this.props.currentSong.id)
+            return index === -1? 0: index;
+        }
+        return 0;
+    };
+
     render() {
         return (
-            <View style={{backgroundColor: 'white', height: GlobalStyle.window_height - 50}}>
+            <View style={{backgroundColor: 'white', height: 265}}>
                 <FlatList
                     data={this.props.playList}
-                    renderItem={({item, index}) => <Item song={item} index={index} isSelected={this.props.currentIndex === index}
+                    renderItem={({item, index}) => <Item song={item} index={index} isSelected={this.getCurrentIndex() === index}
                                                          onPress={this.handlePoint.bind(this)} onDelete={this.handleDelete.bind(this)} />}
                     ItemSeparatorComponent={() => <Text style={styles.separator}/>}
                     keyExtractor={(item, index) => item.id}
@@ -55,7 +63,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         playList: state.songs.playList,
-        currentIndex: state.songs.currentIndex
+        currentSong: state.songs.currentSong
     }
 };
 

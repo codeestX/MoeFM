@@ -16,9 +16,9 @@ class PlayButtonBottom extends Component {
     getPlayIcon(isPlaying) {
         switch (isPlaying) {
             case true:
-                return require('../images/bottom_play.png');
-            case false:
                 return require('../images/bottom_pause.png');
+            case false:
+                return require('../images/bottom_play.png');
         }
     }
 

@@ -11,20 +11,24 @@ import {
     View,
     Text,
     Image,
+    Animated
 } from 'react-native'
-import {
-    BottomSheetHeader,
-    BottomSheetBehavior,
-} from 'react-native-bottom-sheet-behavior'
+import Interactable from 'react-native-interactable';
 import CustomButton from '../component/CustomButton'
 import PlayerProgress from '../container/PlayerProgress'
 import PlayButtonBottom from '../container/PlayButtonBottom'
 import PlayList from '../container/PlayList'
 import GlobalStyle from '../style/global'
 
-const { STATE_ANCHOR_POINT, STATE_COLLAPSED } = BottomSheetBehavior;
-
 class PlayerUIBottom extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            snapToIndex: 0
+        };
+        this._deltaY = new Animated.Value(GlobalStyle.window_height-200);
+    }
 
     handleNext() {
         if (this.props.onNext) {
@@ -32,8 +36,11 @@ class PlayerUIBottom extends Component {
         }
     }
 
-    handleState = (state) => {
-        this.bottomSheet.setBottomSheetState(state)
+    handleState = () => {
+        this.refs['headInstance'].snapTo({index: this.state.snapToIndex});
+        this.setState({
+            snapToIndex: this.state.snapToIndex === 0? 1: 0
+        });
     };
 
     render() {
@@ -41,38 +48,36 @@ class PlayerUIBottom extends Component {
             return null;
         }
         return (
-        <BottomSheetBehavior
-            anchorEnabled
-            anchorPoint={230}
-            peekHeight={55}
-            elevation={8}
-            ref={(bottomSheet) => { this.bottomSheet = bottomSheet }}>
-            <View style={{backgroundColor:'white'}}>
-                <BottomSheetHeader
-                    textColorExpanded={'black'}
-                    backgroundColor={'white'}
-                    backgroundColorExpanded={'white'}>
-                    <CustomButton onPress={() => this.props.onPress()}>
-                        <View style={{height: 55}}>
-                            <PlayerProgress/>
-                            <View style={styles.headerContainer}>
-                                <Image source={{uri: this.props.currentSong.cover, width: 30, height: 30}}/>
-                                <Text style={{flex: 1, marginLeft: 10}} numberOfLines={1}>{this.props.currentSong.title}</Text>
-                                <PlayButtonBottom innerStyle={styles.icon}/>
-                                <CustomButton onPress={this.handleNext.bind(this)}>
-                                    <Image style={styles.icon} source={require('../images/bottom_next.png')}/>
-                                </CustomButton>
-                                <CustomButton onPress={() => this.handleState(STATE_ANCHOR_POINT)}>
-                                    <Image style={styles.icon} source={require('../images/bottom_list.png')}/>
-                                </CustomButton>
+            <View style={styles.panelContainer}>
+                <Interactable.View
+                    ref='headInstance'
+                    verticalOnly={true}
+                    snapPoints={[{y: GlobalStyle.window_height-400}, {y: GlobalStyle.window_height-135}]}
+                    boundaries={{top: GlobalStyle.window_height-400}}
+                    initialPosition={{y: GlobalStyle.window_height-135}}
+                    animatedValueY={this._deltaY}>
+                    <View>
+                        <CustomButton onPress={() => this.props.onPress()}>
+                            <View style={{height: 55, backgroundColor: 'white'}}>
+                                <PlayerProgress/>
+                                <View style={styles.headerContainer}>
+                                    <Image source={{uri: this.props.currentSong.cover, width: 30, height: 30}}/>
+                                    <Text style={{flex: 1, marginLeft: 10}} numberOfLines={1}>{this.props.currentSong.title}</Text>
+                                    <PlayButtonBottom innerStyle={styles.icon}/>
+                                    <CustomButton onPress={this.handleNext.bind(this)}>
+                                        <Image style={styles.icon} source={require('../images/bottom_next.png')}/>
+                                    </CustomButton>
+                                    <CustomButton onPress={this.handleState}>
+                                        <Image style={styles.icon} source={require('../images/bottom_list.png')}/>
+                                    </CustomButton>
+                                </View>
+                                <Text style={{height: 0.5, backgroundColor: 'gray', width: GlobalStyle.window_width, marginTop: 3}}/>
                             </View>
-                            <Text style={{height: 0.5, backgroundColor: 'gray', width: GlobalStyle.window_width, marginTop: 3}}/>
-                        </View>
-                    </CustomButton>
-                </BottomSheetHeader>
-                <PlayList />
+                        </CustomButton>
+                        <PlayList />
+                    </View>
+                </Interactable.View>
             </View>
-        </BottomSheetBehavior>
         )
     }
 }
@@ -87,7 +92,14 @@ const styles = StyleSheet.create({
         marginVertical: 3,
         paddingHorizontal: 20,
         alignItems: 'center'
-    }
+    },
+    panelContainer: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+    },
 });
 
 const mapStateToProps = (state) => {

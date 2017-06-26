@@ -3,8 +3,8 @@ package com.moefm;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.wix.interactable.Interactable;
 import com.rnfs.RNFSPackage;
-import com.bottomsheetbehavior.BottomSheetBehaviorPackage;
 import io.realm.react.RealmReactPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -30,8 +30,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new Interactable(),
             new RNFSPackage(),
-            new BottomSheetBehaviorPackage(),
             new RealmReactPackage(),
             new BlurViewPackage(),
             new VectorIconsPackage(),
