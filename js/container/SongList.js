@@ -95,7 +95,9 @@ const styles = StyleSheet.create({
         paddingVertical: 6
     },
     intro: {
-        color: GlobalStyles.text_dark_primary
+        color: GlobalStyles.text_dark_primary,
+        marginHorizontal: 10,
+        marginBottom: 10
     },
     icon: {
         height: 30,

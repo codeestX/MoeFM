@@ -9,7 +9,6 @@ import com.zmxv.RNSound.RNSoundPackage;
 import com.wix.interactable.Interactable;
 import com.rnfs.RNFSPackage;
 import com.cmcewen.blurview.BlurViewPackage;
-import com.audioStreaming.ReactNativeAudioStreamingPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -35,8 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNSoundPackage(),
             new Interactable(),
             new RNFSPackage(),
-            new BlurViewPackage(),
-            new ReactNativeAudioStreamingPackage()
+            new BlurViewPackage()
       );
     }
   };

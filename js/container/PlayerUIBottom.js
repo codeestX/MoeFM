@@ -11,7 +11,8 @@ import {
     View,
     Text,
     Image,
-    Animated
+    Animated,
+    Platform,
 } from 'react-native'
 import Interactable from 'react-native-interactable';
 import CustomButton from '../component/CustomButton'
@@ -52,9 +53,9 @@ class PlayerUIBottom extends Component {
                 <Interactable.View
                     ref='headInstance'
                     verticalOnly={true}
-                    snapPoints={[{y: GlobalStyle.window_height-400}, {y: GlobalStyle.window_height-135}]}
+                    snapPoints={[{y: GlobalStyle.window_height-400}, {y: Platform.OS === 'android'? GlobalStyle.window_height-135: GlobalStyle.window_height-120}]}
                     boundaries={{top: GlobalStyle.window_height-400}}
-                    initialPosition={{y: GlobalStyle.window_height-135}}
+                    initialPosition={{y: Platform.OS === 'android'? GlobalStyle.window_height-135: GlobalStyle.window_height-120}}
                     animatedValueY={this._deltaY}>
                     <View>
                         <CustomButton onPress={() => this.props.onPress()}>
@@ -98,7 +99,8 @@ const styles = StyleSheet.create({
         top: 0,
         bottom: 0,
         left: 0,
-        right: 0
+        right: 0,
+        height: 1
     },
 });
 

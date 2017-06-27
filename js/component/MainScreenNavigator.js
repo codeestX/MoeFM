@@ -25,7 +25,8 @@ export default MainScreenNavigator = TabNavigator({
                     />
                 ),
                 tabBarLabel: ({ focused, tintColor }) => (
-                    <Text style={{fontSize: 12, color: focused? screenProps.themeColor: tintColor}}>Music</Text>
+                    <Text style={{fontSize: 12, textAlign: 'center', marginBottom: 2,
+                        color: focused? screenProps.themeColor: tintColor}}>Music</Text>
                 )
             }),},
         Radio: {
@@ -39,7 +40,8 @@ export default MainScreenNavigator = TabNavigator({
                     />
                 ),
                 tabBarLabel: ({ focused, tintColor }) => (
-                    <Text style={{fontSize: 12, color: focused? screenProps.themeColor: tintColor}}>Radio</Text>
+                    <Text style={{fontSize: 12, textAlign: 'center', marginBottom: 2,
+                        color: focused? screenProps.themeColor: tintColor}}>Radio</Text>
                 )
             }),},
         Me: { screen: TabMePage,
@@ -52,7 +54,8 @@ export default MainScreenNavigator = TabNavigator({
                     />
                 ),
                 tabBarLabel: ({ focused, tintColor }) => (
-                    <Text style={{fontSize: 12, color: focused? screenProps.themeColor: tintColor}}>Me</Text>
+                    <Text style={{fontSize: 12, textAlign: 'center', marginBottom: 2,
+                        color: focused? screenProps.themeColor: tintColor}}>Me</Text>
                 )
             }),},
     }, {
