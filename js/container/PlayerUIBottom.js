@@ -53,9 +53,9 @@ class PlayerUIBottom extends Component {
                 <Interactable.View
                     ref='headInstance'
                     verticalOnly={true}
-                    snapPoints={[{y: GlobalStyle.window_height-400}, {y: Platform.OS === 'android'? GlobalStyle.window_height-135: GlobalStyle.window_height-120}]}
+                    snapPoints={[{y: GlobalStyle.window_height-400}, {y: Platform.OS === 'android'? GlobalStyle.window_height-135: GlobalStyle.window_height-118}]}
                     boundaries={{top: GlobalStyle.window_height-400}}
-                    initialPosition={{y: Platform.OS === 'android'? GlobalStyle.window_height-135: GlobalStyle.window_height-120}}
+                    initialPosition={{y: Platform.OS === 'android'? GlobalStyle.window_height-135: GlobalStyle.window_height-118}}
                     animatedValueY={this._deltaY}>
                     <View>
                         <CustomButton onPress={() => this.props.onPress()}>

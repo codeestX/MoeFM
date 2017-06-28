@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TabNavigator } from 'react-navigation';
 
@@ -25,8 +25,7 @@ export default MainScreenNavigator = TabNavigator({
                     />
                 ),
                 tabBarLabel: ({ focused, tintColor }) => (
-                    <Text style={{fontSize: 12, textAlign: 'center', marginBottom: 2,
-                        color: focused? screenProps.themeColor: tintColor}}>Music</Text>
+                    <Text style={[styles.label, {color: focused? screenProps.themeColor: tintColor}]}>Music</Text>
                 )
             }),},
         Radio: {
@@ -40,8 +39,7 @@ export default MainScreenNavigator = TabNavigator({
                     />
                 ),
                 tabBarLabel: ({ focused, tintColor }) => (
-                    <Text style={{fontSize: 12, textAlign: 'center', marginBottom: 2,
-                        color: focused? screenProps.themeColor: tintColor}}>Radio</Text>
+                    <Text style={[styles.label, {color: focused? screenProps.themeColor: tintColor}]}>Radio</Text>
                 )
             }),},
         Me: { screen: TabMePage,
@@ -54,8 +52,7 @@ export default MainScreenNavigator = TabNavigator({
                     />
                 ),
                 tabBarLabel: ({ focused, tintColor }) => (
-                    <Text style={{fontSize: 12, textAlign: 'center', marginBottom: 2,
-                        color: focused? screenProps.themeColor: tintColor}}>Me</Text>
+                    <Text style={[styles.label, {color: focused? screenProps.themeColor: tintColor}]}>Me</Text>
                 )
             }),},
     }, {
@@ -78,3 +75,11 @@ export default MainScreenNavigator = TabNavigator({
         },
     }
 );
+
+const styles = StyleSheet.create({
+    label : {
+        fontSize: 12,
+        textAlign: 'center',
+        marginBottom: 2
+    },
+});

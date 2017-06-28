@@ -10,7 +10,8 @@ import {
     FlatList,
     Text,
     View,
-    StyleSheet
+    StyleSheet,
+    Platform
 } from 'react-native'
 import Item from '../component/PlayItem'
 import GlobalStyle from '../style/global'
@@ -39,7 +40,7 @@ class PlayList extends Component {
 
     render() {
         return (
-            <View style={{backgroundColor: 'white', height: 265}}>
+            <View style={{backgroundColor: 'white', height: Platform.OS === 'android'? 265: 280}}>
                 <FlatList
                     data={this.props.playList}
                     renderItem={({item, index}) => <Item song={item} index={index} isSelected={this.getCurrentIndex() === index}
