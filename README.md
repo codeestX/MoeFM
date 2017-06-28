@@ -19,8 +19,8 @@ Music resource API: [moe.fm](http://moe.fm/)
 ![](https://github.com/codeestX/MoeFM/raw/master/preview/1.jpg)  
 ![](https://github.com/codeestX/MoeFM/raw/master/preview/2.jpg)
 ![](https://github.com/codeestX/MoeFM/raw/master/preview/3.jpg)  
-![](https://github.com/codeestX/MoeFM/raw/master/preview/4.png)
-![](https://github.com/codeestX/MoeFM/raw/master/preview/5.png)  
+![](https://github.com/codeestX/MoeFM/raw/master/preview/4.jpg)
+![](https://github.com/codeestX/MoeFM/raw/master/preview/5.jpg)  
 
 # Usage
 
