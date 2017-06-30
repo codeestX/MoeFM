@@ -42,7 +42,9 @@ const playerMiddleware = store => next => action => {
             init(action.song.url);
             break;
         case NEXT_SONG:
-            init(newState.songs.currentSong.url);
+            if (newState.songs.isPlaying) {
+                init(newState.songs.currentSong.url);
+            }
             break;
         case LAST_SONG:
             init(newState.songs.currentSong.url);
@@ -102,7 +104,7 @@ const release = () => {
 const releaseAndNext = () => {
     //自然播放结束
     release();
-    storeInstance.dispatch({type: NEXT_SONG})
+    storeInstance.dispatch({type: NEXT_SONG, isFinish: true})
 };
 
 const seek = (time) => {

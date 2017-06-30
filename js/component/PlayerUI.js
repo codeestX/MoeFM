@@ -20,6 +20,7 @@ import PlayButton from '../container/PlayButton'
 import LoveButton from '../container/LoveButton'
 import DownloadButton from '../container/DownloadButton'
 import PlayerSlide from '../container/PlayerSlider'
+import PlayDisc from '../container/PlayDisc'
 
 export default class PlayerUI extends Component {
 
@@ -60,10 +61,7 @@ export default class PlayerUI extends Component {
                     />
                 }
                 <View style={styles.content}>
-                    <Image
-                        source={{uri: this.props.song.cover}}
-                        style={styles.cover}
-                    />
+                    <PlayDisc cover={this.props.song.cover}/>
                     <Text style={styles.title}>{this.props.song.title}</Text>
                     <View style={styles.func}>
                         <LoveButton innerStyle={styles.icon}/>

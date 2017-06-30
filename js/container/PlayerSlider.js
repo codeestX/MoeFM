@@ -30,7 +30,7 @@ class PlayerSlider extends Component {
         return (
             <View style={styles.progress}>
                 <Text style={styles.time}>{date.parseSecond2String(this.props.progressTime)}</Text>
-                <Slider style={{flex: 1}}
+                <Slider style={{flex: 1, margin: 3}}
                         maximumValue={this.props.totalTime || 1}
                         value={this.props.progressTime || 0}
                         onSlidingComplete={this.handleChange.bind(this)}

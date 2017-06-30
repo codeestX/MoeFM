@@ -41,19 +41,11 @@ export default class MusicList extends Component {
 
     async fetchMusicData() {
         this.setState({refreshing: true});
-        let wikis = [];
         let result = await Api.getMusicData();
-
         let hotItems = result.response.hot_musics;
         let newItems = result.response.musics;
 
-        for (let i = 0, len = hotItems.length; i < len; i++) {
-            wikis.push(new Wiki(hotItems[i]));
-        }
-
-        for (let i = 0, len = newItems.length; i < len; i++) {
-            wikis.push(new Wiki(newItems[i]));
-        }
+        let wikis = hotItems.map((it) => new Wiki(it)).concat(newItems.map((it) => new Wiki(it)));
 
         this.setState({data: wikis, refreshing: false});
     }

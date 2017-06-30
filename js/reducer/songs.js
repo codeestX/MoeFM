@@ -41,13 +41,7 @@ export default function (state, action) {
     }
     switch (action.type) {
         case ADD_SONG:
-            let newSongIndex = -1;
-            for (let i = 0; i< state.playList.length; i++) {
-                if (state.playList[i].id === action.song.id) {
-                    newSongIndex = i;
-                    break;
-                }
-            }
+            let newSongIndex = state.playList.findIndex((it) => it.id === action.song.id);
             return newSongIndex !== -1? state:
             {
                 ...state,
@@ -68,13 +62,7 @@ export default function (state, action) {
                 currentSong: diffSongs[0]
             };
         case POINT_SONG:
-            let pushSongIndex = -1;
-            for (let i = 0; i< state.playList.length; i++) {
-                if (state.playList[i].id === action.song.id) {
-                    pushSongIndex = i;
-                    break;
-                }
-            }
+            let pushSongIndex = state.playList.findIndex((it) => it.id === action.song.id);
             return pushSongIndex !== -1?
                 {
                     ...state,
@@ -106,11 +94,17 @@ export default function (state, action) {
         case NEXT_SONG:
             if (state.playList.length === 1) {
                 showToast('当前只有一首歌');
-                return state;
+                return {
+                    ...state,
+                    isPlaying: action.isFinish? false: state.isPlaying
+                };
             }
             if (state.currentIndex + 1 >= state.playList.length) {
                 showToast('已经是最后一首歌了');
-                return state;
+                return {
+                    ...state,
+                    isPlaying: action.isFinish? false: state.isPlaying
+                };
             }
             switch (state.playMode) {
                 case LOOP_MODE: //顺序播放
