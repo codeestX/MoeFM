@@ -5,21 +5,21 @@
  */
 
 import showToast from '../util/toast'
-
-//actions
-const ADD_SONG = 'ADD_SONG';        //增加歌曲
-const ADD_SONGS = 'ADD_SONGS';      //批量增加歌曲
-const POINT_SONG = 'POINT_SONG';    //指定歌曲并播放
-const DELETE_SONG = 'DELETE_SONG';  //删除歌曲
-const CLEAR_SONGS = 'CLEAR_SONGS';  //清空歌曲
-const NEXT_SONG = 'NEXT_SONG';      //上一首歌
-const LAST_SONG = 'LAST_SONG';      //下一首歌
-const PAUSE = 'PAUSE';              //暂停、恢复
-const SWITCH_MODE = 'SWITCH_MODE';  //切换播放模式
-const PROGRESS = 'PROGRESS';                    //当前进度
-const SEEK_PROGRESS = 'SEEK_PROGRESS';          //指定进度
-const LOVE = 'LOVE';            //点击喜欢
-const LOCAL = 'LOCAL';          //点击下载
+import {
+    ADD_SONG,
+    ADD_SONGS,
+    POINT_SONG,
+    DELETE_SONG,
+    CLEAR_SONGS,
+    NEXT_SONG,
+    LAST_SONG,
+    PAUSE,
+    SWITCH_MODE,
+    PROGRESS,
+    SEEK_PROGRESS,
+    LOVE,
+    LOCAL
+} from '../action/song'
 
 //playMode
 const LOOP_MODE = 'loop';

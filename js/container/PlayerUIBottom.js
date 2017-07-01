@@ -14,6 +14,7 @@ import {
     Animated,
     Platform,
 } from 'react-native'
+import { nextSong } from '../action/song'
 import Interactable from 'react-native-interactable';
 import CustomButton from '../component/CustomButton'
 import PlayerProgress from '../container/PlayerProgress'
@@ -113,7 +114,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onNext: () => {
-            dispatch({type: 'NEXT_SONG'})
+            dispatch(nextSong())
         }
     }
 };

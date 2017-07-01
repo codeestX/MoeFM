@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import {
     Image,
 } from 'react-native'
+import { pause } from '../action/song'
 import CustomButton from '../component/CustomButton'
 
 class PlayButton extends Component {
@@ -40,7 +41,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onPlay: () => {
-            dispatch({type: 'PAUSE'})
+            dispatch(pause())
         }
     }
 };

@@ -4,12 +4,13 @@
  * @description:
  */
 
-//actions
-const UPDATE_PROGRESS = 'UPDATE_PROGRESS';  //更新进度
-const PRE_TASK = 'PRE_TASK';                //准备任务
-const CREATE_TASK = 'CREATE_TASK';          //创建任务
-const STOP_TASK = 'STOP_TASK';              //停止任务
-const FINISH_TASK = 'FINISH_TASK';          //完成任务
+import {
+    UPDATE_PROGRESS,
+    PRE_TASK,
+    CREATE_TASK,
+    STOP_TASK,
+    FINISH_TASK,
+} from '../action/download'
 
 export default function (state, action) {
     if (!state) {

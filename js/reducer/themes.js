@@ -4,8 +4,9 @@
  * @description:
  */
 import { ThemeFlags } from '../style/theme';
-//actions
-const CHANGE_THEME = 'CHANGE_THEME';        //更换主题
+import {
+    CHANGE_THEME
+} from '../action/theme'
 
 export default function (state, action) {
     if (!state) {

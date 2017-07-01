@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import {
     Image,
 } from 'react-native'
+import { preTask } from '../action/download'
 import CustomButton from '../component/CustomButton'
 
 class DownloadButton extends Component {
@@ -45,7 +46,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onPreTask: (currentSong) => {
-            dispatch({type: 'PRE_TASK', song: currentSong})
+            dispatch(preTask(currentSong))
         }
     }
 };

@@ -61,7 +61,7 @@ export default class PlayerUI extends Component {
                     />
                 }
                 <View style={styles.content}>
-                    <PlayDisc cover={this.props.song.cover}/>
+                    <PlayDisc />
                     <Text style={styles.title}>{this.props.song.title}</Text>
                     <View style={styles.func}>
                         <LoveButton innerStyle={styles.icon}/>

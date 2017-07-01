@@ -7,13 +7,15 @@ let RNFS = require('react-native-fs');
 import showToast from '../util/toast'
 import realm from '../util/realm'
 import DownloadTask from '../model/bean/DownloadTask'
-
-//actions
-const UPDATE_PROGRESS = 'UPDATE_PROGRESS';  //更新进度
-const PRE_TASK = 'PRE_TASK';                //准备任务
-const CREATE_TASK = 'CREATE_TASK';          //创建任务
-const STOP_TASK = 'STOP_TASK';              //停止任务
-const FINISH_TASK = 'FINISH_TASK';          //完成任务
+import { local } from '../action/song'
+import {
+    PRE_TASK,
+    STOP_TASK,
+    FINISH_TASK,
+    createTask,
+    finishTask,
+    updateProgress
+} from '../action/download'
 
 let storeInstance;
 
@@ -25,7 +27,7 @@ const downloadMiddleware = store => next => action => {
     const actionType = String(action.type);
     switch (actionType) {
         case PRE_TASK:
-            createTask(action.song);
+            create(action.song);
             break;
         case STOP_TASK:
             RNFS.stopDownload(action.jobId);
@@ -34,7 +36,7 @@ const downloadMiddleware = store => next => action => {
             let currentSong = thisState.downloadTasks.filter((downloadTask) => downloadTask.jobId === action.jobId)[0].currentSong;
             realm.insertLocaledSong(currentSong);
             RNFS.stopDownload(action.jobId);
-            storeInstance.dispatch({type: 'LOCAL', song: currentSong});
+            storeInstance.dispatch(local(currentSong));
             break;
     }
     return result;
@@ -44,19 +46,18 @@ export default downloadMiddleware;
 
 const beginCallback = (res, song) => {
     showToast('已添加到下载队列');
-    storeInstance.dispatch({type: CREATE_TASK, downloadTask: new DownloadTask(song, res.jobId, null)});
+    storeInstance.dispatch(createTask(new DownloadTask(song, res.jobId, null)));
 };
 
 const progressCallback = (callback) => {
-    console.log(callback);
-    storeInstance.dispatch({type: UPDATE_PROGRESS, progressCallback: callback});
+    storeInstance.dispatch(updateProgress(callback));
 };
 
 const resultCallback = (result) => {
-    storeInstance.dispatch({type: FINISH_TASK, jobId: result.jobId});
+    storeInstance.dispatch(finishTask(result.jobId));
 };
 
-async function createTask(song) {
+async function create(song) {
     let existDir = await RNFS.exists(RNFS.ExternalStorageDirectoryPath + '/MoeFM').then(boolean => boolean);
     if (!existDir) await RNFS.mkdir(RNFS.ExternalStorageDirectoryPath + '/MoeFM');
     let exist = await RNFS.exists(RNFS.ExternalStorageDirectoryPath + '/MoeFM/' + song.title + '.mp3').then(boolean => boolean);

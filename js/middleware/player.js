@@ -4,23 +4,18 @@
  * @description:
  */
 
+import {
+    ADD_SONGS,
+    POINT_SONG,
+    NEXT_SONG,
+    LAST_SONG,
+    PAUSE,
+    SEEK_PROGRESS,
+    nextSong,
+    progress
+} from '../action/song'
+
 let Sound = require('react-native-sound');
-
-//actions
-const ADD_SONG = 'ADD_SONG';        //增加歌曲
-const ADD_SONGS = 'ADD_SONGS';      //批量增加歌曲
-const POINT_SONG = 'POINT_SONG';    //指定歌曲并播放
-const DELETE_SONG = 'DELETE_SONG';  //删除歌曲
-const CLEAR_SONGS = 'CLEAR_SONGS';  //清空歌曲
-const NEXT_SONG = 'NEXT_SONG';      //上一首歌
-const LAST_SONG = 'LAST_SONG';      //下一首歌
-const PAUSE = 'PAUSE';              //暂停、恢复
-const SWITCH_MODE = 'SWITCH_MODE';  //切换播放模式
-const PROGRESS = 'PROGRESS';                    //当前进度
-const SEEK_PROGRESS = 'SEEK_PROGRESS';          //指定进度
-const LOVE = 'LOVE';            //点击喜欢
-const LOCAL = 'LOCAL';          //点击下载
-
 let storeInstance;
 
 const playerMiddleware = store => next => action => {
@@ -104,7 +99,7 @@ const release = () => {
 const releaseAndNext = () => {
     //自然播放结束
     release();
-    storeInstance.dispatch({type: NEXT_SONG, isFinish: true})
+    storeInstance.dispatch(nextSong(true))
 };
 
 const seek = (time) => {
@@ -114,7 +109,7 @@ const seek = (time) => {
 const startProgress = () => {
     if (singletonSong !== null) {
         progressCountDown = setInterval(() => {
-            singletonSong.getCurrentTime((seconds) => storeInstance.dispatch({type: PROGRESS, time: seconds}));
+            singletonSong.getCurrentTime((seconds) => storeInstance.dispatch(progress(seconds)));
         },1000);
     }
 };

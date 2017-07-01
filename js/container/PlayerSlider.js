@@ -12,6 +12,7 @@ import {
     Text,
     Slider,
 } from 'react-native'
+import { seekProgress } from '../action/song'
 import date from '../util/date'
 
 class PlayerSlider extends Component {
@@ -63,7 +64,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onChange: (value) => {
-            dispatch({type: 'SEEK_PROGRESS', time: value})
+            dispatch(seekProgress(value))
         }
     }
 };

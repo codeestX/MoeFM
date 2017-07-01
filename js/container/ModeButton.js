@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import {
     Image,
 } from 'react-native'
+import { switchMode } from '../action/song'
 import CustomButton from '../component/CustomButton'
 
 class ModeButton extends Component {
@@ -42,7 +43,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSwitchMode: () => {
-            dispatch({type: 'SWITCH_MODE'})
+            dispatch(switchMode())
         }
     }
 };

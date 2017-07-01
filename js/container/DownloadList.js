@@ -12,6 +12,7 @@ import {
     View,
     StyleSheet
 } from 'react-native'
+import { stopTask } from '../action/download'
 import Item from '../component/DownloadListItem'
 import GlobalStyle from '../style/global'
 
@@ -63,7 +64,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onDelete: (jobId) => {
-            dispatch({type: 'STOP_TASK', jobId: jobId})
+            dispatch(stopTask(jobId))
         }
     }
 };

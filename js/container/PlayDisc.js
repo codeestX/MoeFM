@@ -76,7 +76,7 @@ class PlayDisc extends Component {
                     left: 35,
                     borderRadius: 100,
                     }}
-                       source={{uri: this.props.cover, width: 190, height: 190}}
+                       source={{uri: this.props.currentSong.cover, width: 190, height: 190}}
                 />
             </View>
         )
@@ -85,7 +85,8 @@ class PlayDisc extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isPlaying: state.songs.isPlaying
+        isPlaying: state.songs.isPlaying,
+        currentSong: state.songs.currentSong
     }
 };
 

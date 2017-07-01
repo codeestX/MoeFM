@@ -13,6 +13,7 @@ import {
     FlatList,
 } from 'react-native'
 import { connect } from 'react-redux'
+import { addSongs, pointSong } from '../action/song'
 import Item from '../component/SongItem'
 import GlobalStyles from  '../style/global'
 import CustomButton from '../component/CustomButton'
@@ -121,11 +122,10 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = (dispatch) => {
     return {
         onPushSong: (song) => {
-            dispatch({type: 'POINT_SONG', song: song});
+            dispatch(pointSong(song));
         },
         onAddSongs: (songs) => {
-            console.log(songs);
-            dispatch({type: 'ADD_SONGS', songs: songs})
+            dispatch(addSongs(songs))
         }
     }
 };

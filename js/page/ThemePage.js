@@ -14,6 +14,7 @@ import {
     AsyncStorage,
 } from "react-native";
 import { connect } from 'react-redux'
+import { changeTheme } from '../action/theme'
 import {ThemeFlags} from '../style/theme';
 import CustomButton from '../component/CustomButton'
 
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = (dispatch) => {
     return {
         onChangeTheme: (color) => {
-            dispatch({type: 'CHANGE_THEME', color: color})
+            dispatch(changeTheme(color))
         },
     }
 };

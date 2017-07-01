@@ -5,15 +5,14 @@
  */
 
 import React, {Component} from 'react'
-import PlayerUI from '../component/PlayerUI'
 import { connect } from 'react-redux'
+import { nextSong, lastSong} from '../action/song'
+import PlayerUI from '../component/PlayerUI'
 
 class PlayerPage extends Component {
 
     handleShowList() {
-        if (this.props.onShowList) {
-            this.props.onShowList()
-        }
+
     }
 
     handleLast() {
@@ -49,13 +48,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onNext: () => {
-            dispatch({type: 'NEXT_SONG'})
+            dispatch(nextSong())
         },
         onLast: () => {
-            dispatch({type: 'LAST_SONG'})
-        },
-        onShowList: () => {
-            dispatch()
+            dispatch(lastSong())
         },
     }
 };

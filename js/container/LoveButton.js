@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import {
     Image,
 } from 'react-native'
+import { love } from '../action/song'
 import realm from '../util/realm'
 import CustomButton from '../component/CustomButton'
 
@@ -49,7 +50,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onLove: (song) => {
-            dispatch({type: 'LOVE', song: song})
+            dispatch(love(song))
         }
     }
 };

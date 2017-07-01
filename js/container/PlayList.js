@@ -13,6 +13,7 @@ import {
     StyleSheet,
     Platform
 } from 'react-native'
+import { pointSong, deleteSong} from '../action/song'
 import Item from '../component/PlayItem'
 import GlobalStyle from '../style/global'
 
@@ -71,10 +72,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onPoint: (song) => {
-            dispatch({type: 'POINT_SONG', song: song})
+            dispatch(pointSong((song)))
         },
         onDelete: (index) => {
-            dispatch({type: 'DELETE_SONG', index: index})
+            dispatch(deleteSong(index))
         }
     }
 };
